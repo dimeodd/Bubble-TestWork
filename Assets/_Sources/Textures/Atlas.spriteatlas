@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: a07c1189db1328140ad1f2c64ce4048d, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 5a198af11ba589d4fa0ea475cf498d12, type: 3}
+  - {fileID: 21300000, guid: a0e00032a0a9fb24194d5a7d48b764e6, type: 3}
+  - {fileID: 21300000, guid: 0c1e6913f9e15724caf32af5bb085228, type: 3}
+  - {fileID: 21300000, guid: 75a1b584f47042d4a9520af0dd9048b1, type: 3}
+  - {fileID: 21300000, guid: a95fbb55f5919a34bb780690390af0b6, type: 3}
+  - {fileID: 21300000, guid: 306d6f366384373468c1ae22c79e7384, type: 3}
+  - {fileID: 21300000, guid: 25c03637598c7014ebf99f37ef391e09, type: 3}
+  - {fileID: 21300000, guid: 4c4d8a3846e06d04da59c81f9c9b93b6, type: 3}
+  - {fileID: 21300000, guid: d1df2d98ecc58414dac9627278f66991, type: 3}
+  - {fileID: 21300000, guid: 176d84296fb5555499a1665f7ae2247d, type: 3}
+  - {fileID: 21300000, guid: c177fbe91c707b1478ae3bbbb4dbb10f, type: 3}
+  - {fileID: 21300000, guid: 1df0b50a3475cb74483f079cf92348ff, type: 3}
+  - {fileID: 21300000, guid: 639d879aeacbf0745b71dc93be360ff9, type: 3}
+  - {fileID: 21300000, guid: 8fdbd88b50ea1bf4387617e2ed5b845c, type: 3}
+  - {fileID: 21300000, guid: 0b8db03c5b334a848beceaede7578ead, type: 3}
+  - {fileID: 21300000, guid: e5904c0f7d9784f488a9983a5bbbf500, type: 3}
+  - {fileID: 21300000, guid: 20eafd3f48eb52149ae5545047352c32, type: 3}
+  - {fileID: 21300000, guid: 5151a26fd8419744596448997602f344, type: 3}
+  - {fileID: 21300000, guid: 956f666fb38d6a24abb78a3d57574c43, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - pause menu
+  - mute_white
+  - volume
+  - close
+  - triangle
+  - united-kingdom
+  - russia
+  - reload (1)
+  - exclamation
+  - WhiteTexture
+  - mute
+  - info (1)
+  - reload_white
+  - info (2)
+  - info
+  - pause_white
+  - pause
+  - button 1
+  - home
+  m_RenderDataMap: {}
+  m_Tag: Atlas
+  m_IsVariant: 0

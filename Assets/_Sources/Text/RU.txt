@@ -1,0 +1,4 @@
+$Classic_Mode;Заданный режим;
+$Random_Mode;Случайный режим;
+
+$Pause;Пауза;
