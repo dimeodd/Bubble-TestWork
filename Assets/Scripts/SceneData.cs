@@ -6,8 +6,6 @@ public class SceneData : MonoBehaviour
 {
     public GameObject PauseMenu;
     public Transform BallsArea;
-
-    [Header("Camera")]
-    public HorizontalCameraScaler CameraScaler;
     public Camera MainCamera;
+    public Transform FirePoint;
 }

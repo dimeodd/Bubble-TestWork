@@ -6,9 +6,11 @@ public class StaticData : ScriptableObject
     public int GridWidth;
     public int GridHeight;
 
+    public float GridOffset = 6.5f;
+    public float FirePointOffset = 2;
+
     public GameObject TestBall;
     public BallProperty[] balls;
-
 }
 
 [System.Serializable]

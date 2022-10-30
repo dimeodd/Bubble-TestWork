@@ -44,3 +44,6 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4294902015
     Ball: {fileID: 5376016277772118610, guid: 35da64f3addaf9c429e6594c98b6e86a, type: 3}
+  UIlayer:
+    serializedVersion: 2
+    m_Bits: 32

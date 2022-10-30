@@ -16,17 +16,21 @@ public class World_ClassicMode : MonoBehaviour
 
     void Start()
     {
-        _scene.CameraScaler.TargetWidth = (float)_stData.GridWidth / 2;
-
         _world = new EcsWorld();
         var grid = new HexGridData();
 
         _updSys = new EcsSystem(_world)
+            .Add(new CameraMoverSystem())
+            .Add(new BallsAreaMoverSystem())
+            .Add(new FirePointMoverSystem())
+
             .Add(new GridCreatorSystem())
-            .Add(new BallsLoaderSystem());
+            .Add(new BallsLoaderSystem())
+
+            .Add(new UserInputSystem())
+            .Add(new GunSystem());
 
         _fixUpdSys = new EcsSystem(_world)
-            .Add(new BallsAreaMoverSystem())
             .Add(new BallSpawnerSystem())
             .OneFrame<BallSpawnData>();
 
