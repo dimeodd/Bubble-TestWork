@@ -5,6 +5,7 @@ namespace EcsStructs
     public struct BallSpawnData
     {
         public GameObject ball;
-        Vector2 pos;
+        public int x;
+        public int y;
     }
 }
