@@ -27,11 +27,13 @@ public class World_ClassicMode : MonoBehaviour
             .Add(new BallsAreaMoverSystem())
             .Add(new FirePointMoverSystem())
 
-            .Add(new UserInputSystem())
-            .Add(new AimSystem());
+            .Add(new UserInputSystem());
 
         _fixUpdSys = new EcsSystem(_world)
+            .Add(new AimLineSystem())
             .Add(new BallSpawnerSystem())
+            .OneFrame<ButtonUpTag>()
+            .OneFrame<ButtonDownTag>()
             .OneFrame<BallSpawnData>();
 
         _allSys = new EcsSystem(_world)

@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3414352119109102890}
   - component: {fileID: 3414352119109102889}
-  - component: {fileID: -1478069793435047624}
-  m_Layer: 6
+  - component: {fileID: 3788278038884824822}
+  m_Layer: 0
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,8 +85,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &-1478069793435047624
-PolygonCollider2D:
+--- !u!58 &3788278038884824822
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -99,20 +99,5 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.5, y: 0.288675}
-      - {x: -0.5, y: -0.288675}
-      - {x: 0, y: -0.577}
-      - {x: 0.5, y: -0.288675}
-      - {x: 0.5, y: 0.288675}
-      - {x: 0, y: 0.577}
+  serializedVersion: 2
+  m_Radius: 0.5

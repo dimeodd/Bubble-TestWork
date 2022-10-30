@@ -26,7 +26,13 @@ namespace MyEcs
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public T[] ToList()
+        public void Clear()
+        {
+            Count = 0;
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public T[] ToArray()
         {
             T[] output = new T[Count];
             Array.Copy(_data, 0, output, 0, Count);

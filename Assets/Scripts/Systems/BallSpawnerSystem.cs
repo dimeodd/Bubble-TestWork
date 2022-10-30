@@ -50,7 +50,7 @@ namespace EcsSystems
         const float sin60 = 0.86602540378443864676372317075294f;
         static float GetHexHeight(float h)
         {
-            return h * sin60;
+            return h * StaticData.sin60;
         }
     }
 }

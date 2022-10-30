@@ -56,6 +56,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5d39c3c86e85b394cb857ae073f45de8, type: 3}
   - {fileID: 21300000, guid: a156a049d47c05c45b7c0c226463463b, type: 3}
   - {fileID: 21300000, guid: 354a83a9a397db542bb25921bc0202fe, type: 3}
+  - {fileID: 21300000, guid: ef87bea98243d35499f2a8fb59b16d9e, type: 3}
   - {fileID: 21300000, guid: 2c4e791a6a8221749955a3d0e57ebfdb, type: 3}
   - {fileID: 21300000, guid: 4349299a36a380343b7b1b7e62bc29a4, type: 3}
   - {fileID: 21300000, guid: 23ebdc3eb5a69154c8cb00a3ba38339c, type: 3}
@@ -66,6 +67,7 @@ SpriteAtlas:
   - bubble_White
   - amir-hosseini--AYUZDmQfbw-unsplash
   - bubble_Purple
+  - AimLine
   - bubble_Yellow
   - bubble_Geen
   - bubble_Blue

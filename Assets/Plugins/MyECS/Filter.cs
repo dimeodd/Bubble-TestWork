@@ -184,7 +184,7 @@ namespace MyEcs
 
                     SelectEntityWith_1<T1>();
 
-                    id_1 = GetDataIdFromEntitys<T1>(filter).ToList();
+                    id_1 = GetDataIdFromEntitys<T1>(filter).ToArray();
                     Count = filter.Count;
                 }
             }
@@ -212,7 +212,7 @@ namespace MyEcs
                         SelectEntityWith_1<T1>();
                         ExcludeEntityWith<E1>();
 
-                        id_1 = GetDataIdFromEntitys<T1>(filter).ToList();
+                        id_1 = GetDataIdFromEntitys<T1>(filter).ToArray();
                         Count = filter.Count;
                     }
                 }
@@ -247,7 +247,7 @@ namespace MyEcs
                         ExcludeEntityWith<E1>();
                         ExcludeEntityWith<E2>();
 
-                        id_1 = GetDataIdFromEntitys<T1>(filter).ToList();
+                        id_1 = GetDataIdFromEntitys<T1>(filter).ToArray();
                         Count = filter.Count;
                     }
                 }
@@ -291,8 +291,8 @@ namespace MyEcs
                     SelectEntityWith_1<T1>();
                     SelectEntityWith_2<T2>();
 
-                    id_1 = GetDataIdFromEntitys<T1>(filter).ToList();
-                    id_2 = GetDataIdFromEntitys<T2>(filter).ToList();
+                    id_1 = GetDataIdFromEntitys<T1>(filter).ToArray();
+                    id_2 = GetDataIdFromEntitys<T2>(filter).ToArray();
                     Count = filter.Count;
                 }
             }
@@ -324,8 +324,8 @@ namespace MyEcs
                         SelectEntityWith_2<T2>();
                         ExcludeEntityWith<E1>();
 
-                        id_1 = GetDataIdFromEntitys<T1>(filter).ToList();
-                        id_2 = GetDataIdFromEntitys<T2>(filter).ToList();
+                        id_1 = GetDataIdFromEntitys<T1>(filter).ToArray();
+                        id_2 = GetDataIdFromEntitys<T2>(filter).ToArray();
                         Count = filter.Count;
                     }
                 }
@@ -363,8 +363,8 @@ namespace MyEcs
                         ExcludeEntityWith<E1>();
                         ExcludeEntityWith<E2>();
 
-                        id_1 = GetDataIdFromEntitys<T1>(filter).ToList();
-                        id_2 = GetDataIdFromEntitys<T2>(filter).ToList();
+                        id_1 = GetDataIdFromEntitys<T1>(filter).ToArray();
+                        id_2 = GetDataIdFromEntitys<T2>(filter).ToArray();
                         Count = filter.Count;
                     }
                 }
@@ -413,9 +413,9 @@ namespace MyEcs
                     SelectEntityWith_2<T2>();
                     SelectEntityWith_2<T3>();
 
-                    id_1 = GetDataIdFromEntitys<T1>(filter).ToList();
-                    id_2 = GetDataIdFromEntitys<T2>(filter).ToList();
-                    id_3 = GetDataIdFromEntitys<T3>(filter).ToList();
+                    id_1 = GetDataIdFromEntitys<T1>(filter).ToArray();
+                    id_2 = GetDataIdFromEntitys<T2>(filter).ToArray();
+                    id_3 = GetDataIdFromEntitys<T3>(filter).ToArray();
                     Count = filter.Count;
                 }
             }
@@ -451,9 +451,9 @@ namespace MyEcs
                         SelectEntityWith_2<T3>();
                         ExcludeEntityWith<E1>();
 
-                        id_1 = GetDataIdFromEntitys<T1>(filter).ToList();
-                        id_2 = GetDataIdFromEntitys<T2>(filter).ToList();
-                        id_3 = GetDataIdFromEntitys<T3>(filter).ToList();
+                        id_1 = GetDataIdFromEntitys<T1>(filter).ToArray();
+                        id_2 = GetDataIdFromEntitys<T2>(filter).ToArray();
+                        id_3 = GetDataIdFromEntitys<T3>(filter).ToArray();
                         Count = filter.Count;
                     }
                 }
@@ -507,10 +507,10 @@ namespace MyEcs
                     SelectEntityWith_2<T3>();
                     SelectEntityWith_2<T4>();
 
-                    id_1 = GetDataIdFromEntitys<T1>(filter).ToList();
-                    id_2 = GetDataIdFromEntitys<T2>(filter).ToList();
-                    id_3 = GetDataIdFromEntitys<T3>(filter).ToList();
-                    id_4 = GetDataIdFromEntitys<T4>(filter).ToList();
+                    id_1 = GetDataIdFromEntitys<T1>(filter).ToArray();
+                    id_2 = GetDataIdFromEntitys<T2>(filter).ToArray();
+                    id_3 = GetDataIdFromEntitys<T3>(filter).ToArray();
+                    id_4 = GetDataIdFromEntitys<T4>(filter).ToArray();
                     Count = filter.Count;
                 }
             }
@@ -550,10 +550,10 @@ namespace MyEcs
                         SelectEntityWith_2<T4>();
                         ExcludeEntityWith<E1>();
 
-                        id_1 = GetDataIdFromEntitys<T1>(filter).ToList();
-                        id_2 = GetDataIdFromEntitys<T2>(filter).ToList();
-                        id_3 = GetDataIdFromEntitys<T3>(filter).ToList();
-                        id_4 = GetDataIdFromEntitys<T4>(filter).ToList();
+                        id_1 = GetDataIdFromEntitys<T1>(filter).ToArray();
+                        id_2 = GetDataIdFromEntitys<T2>(filter).ToArray();
+                        id_3 = GetDataIdFromEntitys<T3>(filter).ToArray();
+                        id_4 = GetDataIdFromEntitys<T4>(filter).ToArray();
                         Count = filter.Count;
                     }
                 }
@@ -611,11 +611,11 @@ namespace MyEcs
                     SelectEntityWith_2<T4>();
                     SelectEntityWith_2<T5>();
 
-                    id_1 = GetDataIdFromEntitys<T1>(filter).ToList();
-                    id_2 = GetDataIdFromEntitys<T2>(filter).ToList();
-                    id_3 = GetDataIdFromEntitys<T3>(filter).ToList();
-                    id_4 = GetDataIdFromEntitys<T4>(filter).ToList();
-                    id_5 = GetDataIdFromEntitys<T5>(filter).ToList();
+                    id_1 = GetDataIdFromEntitys<T1>(filter).ToArray();
+                    id_2 = GetDataIdFromEntitys<T2>(filter).ToArray();
+                    id_3 = GetDataIdFromEntitys<T3>(filter).ToArray();
+                    id_4 = GetDataIdFromEntitys<T4>(filter).ToArray();
+                    id_5 = GetDataIdFromEntitys<T5>(filter).ToArray();
                     Count = filter.Count;
                 }
             }
@@ -659,11 +659,11 @@ namespace MyEcs
                         SelectEntityWith_2<T5>();
                         ExcludeEntityWith<E1>();
 
-                        id_1 = GetDataIdFromEntitys<T1>(filter).ToList();
-                        id_2 = GetDataIdFromEntitys<T2>(filter).ToList();
-                        id_3 = GetDataIdFromEntitys<T3>(filter).ToList();
-                        id_4 = GetDataIdFromEntitys<T4>(filter).ToList();
-                        id_5 = GetDataIdFromEntitys<T5>(filter).ToList();
+                        id_1 = GetDataIdFromEntitys<T1>(filter).ToArray();
+                        id_2 = GetDataIdFromEntitys<T2>(filter).ToArray();
+                        id_3 = GetDataIdFromEntitys<T3>(filter).ToArray();
+                        id_4 = GetDataIdFromEntitys<T4>(filter).ToArray();
+                        id_5 = GetDataIdFromEntitys<T5>(filter).ToArray();
                         Count = filter.Count;
                     }
                 }

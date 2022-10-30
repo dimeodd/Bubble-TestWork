@@ -14,7 +14,7 @@ namespace EcsSystems
         int UIlayer;
         public void Init()
         {
-            UIlayer = _stData.UImask.value;
+            UIlayer = _stData.UImask;
 
             var ent = _world.NewEntity();
             ent.Get<InputData>();
@@ -27,15 +27,23 @@ namespace EcsSystems
 
             foreach (var i in inputFilter)
             {
-                ref var inputData = ref inputFilter.Get1(i);
-                inputData.temp = inputData.curr;
+                ref var input = ref inputFilter.Get1(i);
+                var temp = input;
 
-                ref var input = ref inputData.curr;
-
-                inputData.curr.pos = wPos;
-                inputData.curr.IsPressed = Input.GetMouseButton(0);
+                input.pos = wPos;
                 var collider = Physics2D.OverlapPoint(wPos, UIlayer);
                 input.IsInsideFireZone = collider != null;
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    input.IsPressed = true;
+
+                }
+                if (Input.GetMouseButtonUp(0))
+                {
+                    input.IsPressed = false;
+
+                }
             }
         }
     }

@@ -9,11 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -1478069793435047624, guid: 587deeacf84016e449fb6476656c4176, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1.5644531
+      value: 1.00125
       objectReference: {fileID: 0}
     - target: {fileID: -1478069793435047624, guid: 587deeacf84016e449fb6476656c4176, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1.5644531
+      value: 1.00125
       objectReference: {fileID: 0}
     - target: {fileID: 3414352119109102889, guid: 587deeacf84016e449fb6476656c4176, type: 3}
       propertyPath: m_Sprite
@@ -41,15 +41,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3414352119109102890, guid: 587deeacf84016e449fb6476656c4176, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3414352119109102890, guid: 587deeacf84016e449fb6476656c4176, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3414352119109102890, guid: 587deeacf84016e449fb6476656c4176, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3414352119109102890, guid: 587deeacf84016e449fb6476656c4176, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -65,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3414352119109102895, guid: 587deeacf84016e449fb6476656c4176, type: 3}
       propertyPath: m_Name
-      value: Blue Ball
+      value: Ball Blue Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 587deeacf84016e449fb6476656c4176, type: 3}
