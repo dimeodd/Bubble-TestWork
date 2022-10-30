@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace EcsSystems
 {
-    public class AimSystem :  IUpd
+    public class AimSystem : IUpd
     {
         Filter<InputData> inputFilter = null;
         SceneData _scene = null;
@@ -12,11 +12,15 @@ namespace EcsSystems
 
         public void Upd()
         {
+            var aimLine = _scene.AimLine;
+
             foreach (var i in inputFilter)
             {
                 ref var inputData = ref inputFilter.Get1(i);
                 ref var input = ref inputData.curr;
                 ref var temp = ref inputData.temp;
+                var firePointPos = _scene.FirePoint.position;
+
 
                 //If Fire
                 if (input.IsInsideFireZone &
@@ -26,12 +30,18 @@ namespace EcsSystems
                     ref var fireData = ref ent.Get<FireData>();
                 }
 
-                var firePointPos = _scene.FirePoint.position;
 
+                //AimLine
                 if (input.IsInsideFireZone & input.IsPressed)
                 {
-                    Debug.Log("aimmed2");
-                    Debug.DrawLine(firePointPos, input.pos);
+                    if (!aimLine.enabled) aimLine.enabled = true;
+                    var points = new Vector3[] { firePointPos, input.pos };
+
+                    aimLine.SetPositions(points);
+                }
+                else
+                {
+                    if (aimLine.enabled) aimLine.enabled = false;
                 }
             }
         }

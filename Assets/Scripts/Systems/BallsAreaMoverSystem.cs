@@ -11,8 +11,9 @@ namespace EcsSystems
         public void Upd()
         {
             //TODO сделать прокрутку как в играх из ТЗ
-            Vector2 leftScreenCornerPos = _scene.MainCamera.ScreenToWorldPoint(new Vector2(0, Screen.height));
-            _scene.BallsArea.transform.position = leftScreenCornerPos + new Vector2(0.5f, -0.5f);
+            Vector3 leftScreenCornerPos = _scene.MainCamera.ScreenToWorldPoint(new Vector2(0, Screen.height));
+            leftScreenCornerPos.z = 1;
+            _scene.BallsArea.transform.position = leftScreenCornerPos + new Vector3(0.5f, -0.5f);
         }
     }
 }
