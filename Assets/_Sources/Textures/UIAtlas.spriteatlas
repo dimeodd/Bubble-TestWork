@@ -6,7 +6,7 @@ SpriteAtlas:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Atlas
+  m_Name: UIAtlas
   m_EditorData:
     serializedVersion: 2
     textureSettings:
@@ -78,5 +78,5 @@ SpriteAtlas:
   - button 1
   - home
   m_RenderDataMap: {}
-  m_Tag: Atlas
+  m_Tag: UIAtlas
   m_IsVariant: 0

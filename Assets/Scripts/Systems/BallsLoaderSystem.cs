@@ -1,5 +1,6 @@
 using MyEcs;
 using EcsStructs;
+using UnityEngine;
 
 namespace EcsSystems
 {
@@ -7,25 +8,43 @@ namespace EcsSystems
     {
         EcsWorld _world = null;
         StaticData _stData = null;
+        LevelData _level = null;
 
         public void Init()
         {
-            var h = 5;
-            var w = 11;
+            var map = _level.levelMap;
+            var h = map.height;
+            var w = map.width;
 
             for (int x = 0; x < w; x++)
             {
-                for (int y = 0; y < h; y++)
+                for (int y = 1; y < h; y++)
                 {
-                    var ent = _world.NewEntity();
+                    Color32 ballColor = map.GetPixel(x, h - y);
+                    var ballID = GetBallIDByColor(ballColor);
+                    if (ballID == -1) continue;
 
+                    var ballPrefab = _stData.balls[ballID].Ball;
+
+                    var ent = _world.NewEntity();
                     ref var spawnData = ref ent.Get<BallSpawnData>();
                     spawnData.x = x;
-                    spawnData.y = y;
-                    spawnData.ball = _stData.TestBall;
-
+                    spawnData.y = y-1;
+                    spawnData.ball = ballPrefab;
                 }
             }
+        }
+
+        int GetBallIDByColor(Color32 color)
+        {
+            for (int i = 0, iMax = _stData.balls.Length; i < iMax; i++)
+            {
+                var ballColor = _stData.balls[i].SpawnColor;
+                if (ballColor.CustomEquel(color))
+                    return i;
+            }
+
+            return -1;
         }
     }
 }

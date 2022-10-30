@@ -7,4 +7,13 @@ public class StaticData : ScriptableObject
     public int GridHeight;
 
     public GameObject TestBall;
+    public BallProperty[] balls;
+
+}
+
+[System.Serializable]
+public class BallProperty
+{
+    public Color32 SpawnColor;
+    public GameObject Ball;
 }

@@ -10,5 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abe64bbabc84ab943be30f6e4b78d4af, type: 3}
-  m_Name: TestLevel
+  m_Name: Level 2
   m_EditorClassIdentifier: 
+  levelMap: {fileID: 2800000, guid: 877113b19405e8e429aac35fa9093a2e, type: 3}
+  IsRandomColors: 0
+  BallsSeed: 0
+  ballID: 00000000010000000200000003000000040000000500000006000000
