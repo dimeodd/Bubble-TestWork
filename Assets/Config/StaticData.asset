@@ -18,6 +18,7 @@ MonoBehaviour:
   GridHeight: 500
   GridOffset: 6.5
   FirePointOffset: 3.5
+  PlayerBall: {fileID: 8191436441044458949, guid: 8dd74d403df879e4ba65cb866fa371ff, type: 3}
   TestBall: {fileID: 5933537116744638863, guid: e84185ffff181b4418e931a75df55269, type: 3}
   balls:
   - SpawnColor:
@@ -53,4 +54,5 @@ MonoBehaviour:
     m_Bits: 32
   ReflectMask:
     serializedVersion: 2
-    m_Bits: 65
+    m_Bits: 1
+  LimboPos: {x: -500, y: -500}

@@ -8,12 +8,12 @@ namespace EcsSystems
     {
         Filter<InputData> inputFilter = null;
         SceneData _scene = null;
-        EcsWorld _world = null;
         StaticData _stData = null;
 
         int _reflectMask;
         LineRenderer _lineRenderer;
         MyList<Vector3> points = new MyList<Vector3>(4);
+
         public void Init()
         {
             _reflectMask = _stData.ReflectMask;

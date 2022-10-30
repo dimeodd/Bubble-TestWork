@@ -4,10 +4,15 @@ using UnityEngine;
 
 namespace EcsSystems
 {
-    public class FirePointMoverSystem : IUpd
+    public class FirePointMoverSystem : IInit, IUpd
     {
         StaticData _stData = null;
         SceneData _scene = null;
+
+        public void Init()
+        {
+            Upd();
+        }
 
         public void Upd()
         {

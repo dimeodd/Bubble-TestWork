@@ -19,6 +19,7 @@ public class World_ClassicMode : MonoBehaviour
         _world = new EcsWorld();
         var grid = new HexGridData();
 
+
         _updSys = new EcsSystem(_world)
             .Add(new GridCreatorSystem())
             .Add(new BallsLoaderSystem())
@@ -29,12 +30,24 @@ public class World_ClassicMode : MonoBehaviour
 
             .Add(new UserInputSystem());
 
+
         _fixUpdSys = new EcsSystem(_world)
+            .Add(_level.IsRandomColors ?
+                    new ColorSelectorSystem_Random() :
+                    new ColorSelectorSystem_Chain()
+                )
+            .Add(new PlayerBallSpawner())
             .Add(new AimLineSystem())
             .Add(new BallSpawnerSystem())
+            //TODO BallsColideSystem
+            //TODO DestroySystem
+
+            .OneFrame<NeedBallTag>()
             .OneFrame<ButtonUpTag>()
             .OneFrame<ButtonDownTag>()
+            .OneFrame<PlayerBallSpawnData>()
             .OneFrame<BallSpawnData>();
+
 
         _allSys = new EcsSystem(_world)
             .Add(_updSys)

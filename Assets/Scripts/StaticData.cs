@@ -17,6 +17,8 @@ public class StaticData : ScriptableObject
 
 
     [Header("Balls")]
+    
+    public GameObject PlayerBall;
     public GameObject TestBall;
     public BallProperty[] balls;
 

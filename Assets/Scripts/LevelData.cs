@@ -11,7 +11,7 @@ public class LevelData : ScriptableObject
     public bool IsRandomColors;
     public int BallsSeed;
 
-    public BallType[] ballID;
+    public BallType[] ballIDs;
 }
 
 public enum BallType
