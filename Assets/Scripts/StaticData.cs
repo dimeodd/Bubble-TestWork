@@ -11,6 +11,10 @@ public class StaticData : ScriptableObject
 
     public GameObject TestBall;
     public BallProperty[] balls;
+
+    public LayerMask UImask;
+    public LayerMask WallMask;
+    public LayerMask BallMask;
 }
 
 [System.Serializable]

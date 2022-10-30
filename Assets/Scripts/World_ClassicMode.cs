@@ -20,15 +20,15 @@ public class World_ClassicMode : MonoBehaviour
         var grid = new HexGridData();
 
         _updSys = new EcsSystem(_world)
+            .Add(new GridCreatorSystem())
+            .Add(new BallsLoaderSystem())
+
             .Add(new CameraMoverSystem())
             .Add(new BallsAreaMoverSystem())
             .Add(new FirePointMoverSystem())
 
-            .Add(new GridCreatorSystem())
-            .Add(new BallsLoaderSystem())
-
             .Add(new UserInputSystem())
-            .Add(new GunSystem());
+            .Add(new AimSystem());
 
         _fixUpdSys = new EcsSystem(_world)
             .Add(new BallSpawnerSystem())

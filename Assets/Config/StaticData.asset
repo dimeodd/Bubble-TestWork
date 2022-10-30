@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridWidth: 11
   GridHeight: 500
-  TestBall: {fileID: 166905060417628150, guid: 75a6251a34044e44e92628189284dbbf, type: 3}
+  GridOffset: 6.5
+  FirePointOffset: 3.5
+  TestBall: {fileID: 5933537116744638863, guid: e84185ffff181b4418e931a75df55269, type: 3}
   balls:
   - SpawnColor:
       serializedVersion: 2
@@ -44,6 +46,12 @@ MonoBehaviour:
       serializedVersion: 2
       rgba: 4294902015
     Ball: {fileID: 5376016277772118610, guid: 35da64f3addaf9c429e6594c98b6e86a, type: 3}
-  UIlayer:
+  UImask:
     serializedVersion: 2
     m_Bits: 32
+  WallMask:
+    serializedVersion: 2
+    m_Bits: 128
+  BallMask:
+    serializedVersion: 2
+    m_Bits: 64

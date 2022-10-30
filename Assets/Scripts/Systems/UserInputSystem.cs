@@ -14,7 +14,7 @@ namespace EcsSystems
         int UIlayer;
         public void Init()
         {
-            UIlayer = LayerMask.NameToLayer("UI");
+            UIlayer = _stData.UImask.value;
 
             var ent = _world.NewEntity();
             ent.Get<InputData>();
@@ -32,9 +32,9 @@ namespace EcsSystems
 
                 ref var input = ref inputData.curr;
 
-                input.pos = wPos;
-                input.IsPressed = Input.GetMouseButton(0);
-                var collider = Physics2D.OverlapCircle(wPos, 0.1f, UIlayer);
+                inputData.curr.pos = wPos;
+                inputData.curr.IsPressed = Input.GetMouseButton(0);
+                var collider = Physics2D.OverlapPoint(wPos, UIlayer);
                 input.IsInsideFireZone = collider != null;
             }
         }
