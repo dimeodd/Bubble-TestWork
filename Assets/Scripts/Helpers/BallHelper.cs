@@ -4,21 +4,6 @@ using UnityEngine;
 
 public static class BallHelper
 {
-
-    public static Vector2 IndexToPos(int x, int y)
-    {
-        var isChet = IsChet(y);
-        Vector2 pos;
-
-        if (isChet)
-            pos = new Vector2(x + 0.5f, -y * StaticData.sin60);
-        else
-            pos = new Vector2(x, -y * StaticData.sin60);
-
-        return pos;
-    }
-
-
     public static Vector2 GetBallPositionByHit(RaycastHit2D hit)
     {
         var otherPos = (Vector2)hit.transform.position;
@@ -124,12 +109,3 @@ public static class BallHelper
     }
 }
 
-public enum HexType
-{
-    LEFT_UP,
-    LEFT,
-    LEFT_DOWN,
-    RIGHT_DOWN,
-    RIGHT,
-    RIGHT_UP
-}

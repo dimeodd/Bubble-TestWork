@@ -1,6 +1,7 @@
 using MyEcs;
 using MyEcs.GoPool;
 using EcsStructs;
+using HexMap;
 
 namespace EcsSystems
 {
@@ -17,19 +18,18 @@ namespace EcsSystems
                 ref var ballData = ref filter.Get2(i);
 
                 var myPos = ballData.go.transform.position;
-                var entityID = collideData.other.GetComponent<EntityID>();
-                var otherEnt = entityID.GetEntity();
-
-                var otherBallData = otherEnt.Get<BallData>();
                 var otherPos = collideData.other.transform.position;
 
-                var spawnPos = BallHelper.GetBallIndexByPositions(myPos, otherPos, otherBallData.x, otherBallData.y);
+                var otherEnt = collideData.other.GetComponent<EntityID>().GetEntity();
+                var otherBallData = otherEnt.Get<BallData>();
+
+                var dir = HexVector.getDirection(otherPos, myPos);
+                var spawnPos = otherBallData.hexPos.MoveTo(1, dir);
 
                 var ent = _world.NewEntity();
                 ref var spawnData = ref ent.Get<BallSpawnData>();
                 spawnData.BallID = ballData.BallID;
-                spawnData.x = spawnPos.x;
-                spawnData.y = spawnPos.y;
+                spawnData.hexPos = spawnPos;
                 spawnData.isPlayerBall = true;
             }
 

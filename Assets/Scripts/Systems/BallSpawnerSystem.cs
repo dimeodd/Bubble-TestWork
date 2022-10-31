@@ -2,6 +2,7 @@ using MyEcs;
 using MyEcs.GoPool;
 using EcsStructs;
 using UnityEngine;
+using HexMap;
 
 namespace EcsSystems
 {
@@ -18,42 +19,33 @@ namespace EcsSystems
             foreach (var i in spawnFilter)
             {
                 ref var spawnData = ref spawnFilter.Get1(i);
-                var x = spawnData.x;
-                var y = spawnData.y;
+                var hexPos = spawnData.hexPos;
 
-                var isOutOfWidth = x < 0 | x >= _grid.Width;
-                var isOutOfHeight = y < 0 | y >= _grid.Height;
+                var isOutOfWidth = hexPos.x < 0 | hexPos.x >= _grid.Width;
+                var isOutOfHeight = hexPos.y < 0 | hexPos.y >= _grid.Height;
                 if (isOutOfWidth | isOutOfHeight) continue;
 
-                var isChet = y % 2 > 0;
-                var isOutOfChetWidth = x >= _grid.Width - 1;
+                var isChet = hexPos.IsChet();
+                var isOutOfChetWidth = hexPos.x >= _grid.Width - 1;
                 if (isChet & isOutOfChetWidth) continue;
 
-                var go = MonoBehaviour.Instantiate(_stData.balls[spawnData.BallID].Ball, _scene.BallsArea);
-                go.transform.localPosition = BallHelper.IndexToPos(x, y);
 
                 var ent = _world.NewEntity();
-                var entID = go.AddComponent<EntityID>();
-                entID.SetEntity(ent);
+
                 ref var ballData = ref ent.Get<BallData>();
-                ballData.x = x;
-                ballData.y = y;
+                ballData.hexPos = hexPos;
                 ballData.BallID = spawnData.BallID;
 
-                _grid.data[x, y] = ent;
+                _grid.data[hexPos.x, hexPos.y] = ent;
 
-                //TODO
+                var go = MonoBehaviour.Instantiate(_stData.balls[spawnData.BallID].Ball, _scene.BallsArea);
+                go.transform.localPosition = hexPos.ToWorldPos();
+                var entID = go.AddComponent<EntityID>();
+                entID.SetEntity(ent);
+
                 if (spawnData.isPlayerBall)
                 {
-                    var arr = BallHelper.GetClosestIndexesByIndex(x, y);
-                    int sameCount = 0;
-
-                    for (int k = 0; k < 2; k++)
-                    {
-                        utrirhtoniu
-                    }
-                    if (sameCount > 2)
-                        ent.Get<BlopedBallTag>();
+                    ent.Get<BlopedBallTag>();
                 }
             }
         }
