@@ -7,15 +7,36 @@ namespace EcsSystems
 {
     public class BlopedBubbleSystem : IUpd
     {
+        Filter<DestroyTag, BallData> destroyFilter = null;
+
         Filter<BlopedBallTag, BallData> filter = null;
         HexGridData _grid = null;
+        StaticData _stData = null;
 
         public void Upd()
         {
+            foreach (var j in filter)
+            {
+                var ent = filter.GetEntity(j);
+                var blopCount = 0;
+
+                MarkSameBalls(ent, ref blopCount);
+
+                if (blopCount < _stData.CountRequredForBlop)
+                {
+                    foreach (var i in destroyFilter)
+                    {
+                        var destrEnt = destroyFilter.GetEntity(i);
+                        destrEnt.Del<DestroyTag>();
+                    }
+
+                }
+            }
+
             foreach (var i in filter)
             {
                 var ent = filter.GetEntity(i);
-                MarkSameBalls(ent);
+                ent.Del<BlopedBallTag>();
             }
         }
 
@@ -25,7 +46,7 @@ namespace EcsSystems
         // 2. Ищут самую левый пиксель в этом ряду. Идут пока не будет другой цвет.
         // 3. Идут от него вправо (и сразу заменяют цвет), проверяя верхний и нижний пиксель. Если цвет похож (У внерхнего/нижнего), то добавляют пиксель в SourcePointList
         // 4. Если есть ещё точки в SourcePointList, то GOTO 1
-        void MarkSameBalls(Entity source)
+        void MarkSameBalls(Entity source, ref int blopCount)
         {
             var sourceList = new MyList<Entity>(4);
             sourceList.Add(source);
@@ -56,10 +77,10 @@ namespace EcsSystems
                 var upIsSame = false;
                 var downIsSame = false;
 
-
-                // | () |
-                // |()()|
-                // | () |
+                //HexStuff
+                // | () |   X..   (X)(.)
+                // |()()|   .0.  (.)(0)(.)
+                // | () |   X..   (X)(.)
                 if (isChet & hexVec.x > 0)
                 {
                     if (haveUpSpace)
@@ -92,6 +113,7 @@ namespace EcsSystems
                 {
                     var currEnt = _grid.data[hexVec.x, hexVec.y];
                     currEnt.Get<DestroyTag>();
+                    blopCount++;
 
                     if (haveUpSpace)
                     {
@@ -124,10 +146,11 @@ namespace EcsSystems
                 }
                 while (hexVec.x < _grid.Width && IsRightBall(_grid.data[hexVec.x, hexVec.y], sourceBallID));
 
+                //HexStuff
+                // |()()|   ..X   (.)(X)
+                // | () |   .0.  (.)(0)(.)
+                // |()()|   ..X   (.)(X)
                 hexVec.x--;
-                // |()()|
-                // | () |
-                // |()()|
                 if (!isChet & hexVec.x < _grid.Width - 1)
                 {
                     if (haveUpSpace)

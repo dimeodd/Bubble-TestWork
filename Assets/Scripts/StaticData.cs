@@ -18,6 +18,7 @@ public class StaticData : ScriptableObject
 
     [Header("Balls")]
     
+    public int CountRequredForBlop = 3;
     public float BallSpeed = 1f;
     public GameObject PlayerBall;
     public GameObject AimBall;
