@@ -1,6 +1,7 @@
 using MyEcs;
 using EcsStructs;
 using UnityEngine;
+using HexMap;
 
 namespace EcsSystems
 {
@@ -18,7 +19,7 @@ namespace EcsSystems
 
             for (int x = 0; x < w; x++)
             {
-                for (int y = 1; y < h; y++)
+                for (int y = 1; y < h; y++) //FIXME костыль фиксящий дубликат верхнего ряда
                 {
                     Color32 ballColor = map.GetPixel(x, h - y);
                     var ballID = GetBallIDByColor(ballColor);
@@ -26,8 +27,7 @@ namespace EcsSystems
 
                     var ent = _world.NewEntity();
                     ref var spawnData = ref ent.Get<BallSpawnData>();
-                    spawnData.x = x;
-                    spawnData.y = y - 1; //костыль фиксящий дубликат верхнего ряда
+                    spawnData.hexPos = new HexVector(x, y - 1); //FIXME костыль фиксящий дубликат верхнего ряда
                     spawnData.BallID = ballID;
                 }
             }

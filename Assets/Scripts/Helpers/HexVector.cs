@@ -153,7 +153,7 @@ namespace HexMap
             switch (direction)
             {
                 case HexType.LEFT_UP:
-                    x -= dist / 2; if (!isChet) x++;
+                    x -= dist / 2; if (!isChet) x--;
                     y -= dist;
                     break;
 
@@ -162,7 +162,7 @@ namespace HexMap
                     break;
 
                 case HexType.LEFT_DOWN:
-                    x -= dist / 2; if (!isChet) x++;
+                    x -= dist / 2; if (!isChet) x--;
                     y += dist;
                     break;
 
