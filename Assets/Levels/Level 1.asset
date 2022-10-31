@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abe64bbabc84ab943be30f6e4b78d4af, type: 3}
   m_Name: Level 1
   m_EditorClassIdentifier: 
-  levelMap: {fileID: 2800000, guid: f1db705b526bafb4f9d851d4814275b1, type: 3}
-  IsRandom: 0
-  Seed: 0
-  ballID: 00000000010000000200000003000000040000000500000006000000
+  IsRandomMap: 0
+  levelMap: {fileID: 2800000, guid: 2b9e38b1875cddf49b94fd98884eea60, type: 3}
+  levelSeed: 0
+  IsRandomColors: 0
+  BallsSeed: 0
+  ballIDs: 05000000060000000000000003000000

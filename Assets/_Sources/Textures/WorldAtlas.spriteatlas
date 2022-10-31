@@ -60,6 +60,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 2c4e791a6a8221749955a3d0e57ebfdb, type: 3}
   - {fileID: 21300000, guid: 4349299a36a380343b7b1b7e62bc29a4, type: 3}
   - {fileID: 21300000, guid: 23ebdc3eb5a69154c8cb00a3ba38339c, type: 3}
+  - {fileID: 21300000, guid: 1cb876fe6d825014aba5cec1ab2efaea, type: 3}
   m_PackedSpriteNamesToIndex:
   - bubble_Orange
   - bubble_Red
@@ -71,6 +72,7 @@ SpriteAtlas:
   - bubble_Yellow
   - bubble_Geen
   - bubble_Blue
+  - 1614641073_5-p-fon-dlya-fotoshopa-igri-8
   m_RenderDataMap: {}
   m_Tag: WorldAtlas
   m_IsVariant: 0
