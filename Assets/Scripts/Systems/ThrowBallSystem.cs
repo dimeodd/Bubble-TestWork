@@ -10,9 +10,13 @@ namespace EcsSystems
         Filter<PlayerBallData> playerBallFilter = null;
         StaticData _stData = null;
         SceneData _scene = null;
+        PauseMenu _pauseMenu = null;
 
         public void Upd()
         {
+            if (_pauseMenu.timeFromPause < 0.5f)
+                return;
+
             foreach (var j in inputFilter)
             {
                 ref var input = ref inputFilter.Get1(j);

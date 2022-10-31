@@ -38,6 +38,7 @@ namespace EcsSystems
                 var collider = Physics2D.OverlapPoint(wPos, UIlayer);
                 input.IsInsideFireZone = collider != null;
 
+
                 if (Input.GetMouseButtonDown(0))
                 {
                     input.IsPressed = true;

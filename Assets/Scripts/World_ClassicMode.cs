@@ -33,7 +33,7 @@ public class World_ClassicMode : MonoBehaviour
             .Add(new GridCreatorSystem())
             .Add(new BallsLoaderSystem())
 
-            .Add( new UserInputSystem());
+            .Add(new UserInputSystem());
 
 
         _fixUpdSys = new EcsSystem(_world)
@@ -59,6 +59,7 @@ public class World_ClassicMode : MonoBehaviour
             .Inject(_stData)
             .Inject(_level)
             .Inject(_scene)
+            .Inject(_scene.PauseMenuScript)
             .Inject(grid);
 
         _allSys.Init();

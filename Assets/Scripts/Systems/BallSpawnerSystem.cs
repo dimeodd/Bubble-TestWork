@@ -49,8 +49,6 @@ namespace EcsSystems
                 tf.localPosition = hexPos.ToWorldPos();
                 var entID = go.AddComponent<EntityID>();
                 entID.SetEntity(ent);
-
-                Debug.DrawLine(tf.position, tf.position + Vector3.one, Color.red, 1f);
             }
 
             foreach (var i in spawnFilter)

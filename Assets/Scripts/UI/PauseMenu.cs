@@ -7,6 +7,8 @@ public class PauseMenu : MonoBehaviour
 {
     public bool isPause;
     public Button closeButton;
+    public float timeFromPause;
+    public GameObject PausePanel;
 
     private void Awake()
     {
@@ -15,26 +17,22 @@ public class PauseMenu : MonoBehaviour
 
     public void TurnOn()
     {
-        gameObject.SetActive(true);
+        PausePanel.SetActive(true);
+        isPause = true;
     }
     public void TurnOff()
     {
-        gameObject.SetActive(false);
-    }
-
-    private void OnEnable()
-    {
-        isPause = true;
-    }
-
-    private void OnDisable()
-    {
+        PausePanel.SetActive(false);
         isPause = false;
+        timeFromPause = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (timeFromPause < 10)
+            timeFromPause += Time.deltaTime;
+
 #if UNITY_ANDROID
         if (Input.backButtonLeavesApp)
         {
