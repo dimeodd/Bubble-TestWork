@@ -5,6 +5,7 @@ using HexMap;
 
 namespace EcsSystems
 {
+
     public class BallsLoaderSystem : IInit
     {
         StaticData _stData = null;
@@ -16,6 +17,11 @@ namespace EcsSystems
             var map = _level.levelMap;
             var h = map.height;
             var w = map.width;
+
+            //HexMap
+            // 0. [a1][a2][a3][a4]  (a1)(a2)(a3)(a4)
+            // 1. [b1][b2][b3][b4]    (b1)(b2)(b3)
+            // 2. [c1][c2][c3][c4]  (c1)(c2)(c3)(a4)
 
             for (int x = 0; x < w; x++)
             {

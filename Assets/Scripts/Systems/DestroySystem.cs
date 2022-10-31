@@ -6,22 +6,24 @@ namespace EcsSystems
 {
     public class DestroySystem : IUpd
     {
-        Filter<DestroyTag, PlayerBallData> ballFilter = null;
+        Filter<DestroyTag, PlayerBallData> playerBallFilter = null;
+        Filter<DestroyTag, BallData, GoEntityProvider> ballFilter = null;
         Filter<InputData> inputFilter = null;
         EcsWorld _world = null;
 
         public void Upd()
         {
             //Удаление PlayerBall
-            foreach (var i in ballFilter)
+            foreach (var i in playerBallFilter)
             {
-                ref var ball = ref ballFilter.Get2(i);
+                var ball = playerBallFilter.Get2(i);
                 MonoBehaviour.Destroy(ball.go, 0.001f);
-                var ent = ballFilter.GetEntity(i);
+
+                var ent = playerBallFilter.GetEntity(i);
                 ent.Destroy();
             }
             //Разблокировка управления
-            if (ballFilter.Count > 0)
+            if (playerBallFilter.Count > 0)
             {
                 foreach (var j in inputFilter)
                 {
@@ -34,6 +36,14 @@ namespace EcsSystems
             }
 
             //TODO Удаление Ball
+            foreach (var i in ballFilter)
+            {
+                var prov = ballFilter.Get3(i);
+                MonoBehaviour.Destroy(prov.provider.gameObject, 0.001f);
+
+                var ent = ballFilter.GetEntity(i);
+                ent.Destroy();
+            }
 
         }
     }
