@@ -7,7 +7,7 @@ namespace EcsSystems
 {
     public class BallsColideSystem : IUpd
     {
-        Filter<BallCollideData, PlayerBallData> filter = null;
+        Filter<BallCollideData, PlayerBallData, GoEntityProvider> filter = null;
         EcsWorld _world = null;
 
         public void Upd()
@@ -16,8 +16,9 @@ namespace EcsSystems
             {
                 ref var collideData = ref filter.Get1(i);
                 ref var ballData = ref filter.Get2(i);
+                ref var provider = ref filter.Get3(i);
 
-                var myPos = ballData.go.transform.position;
+                var myPos = provider.provider.transform.position;
                 var otherPos = collideData.other.transform.position;
 
                 var otherEnt = collideData.other.GetComponent<EntityID>().GetEntity();

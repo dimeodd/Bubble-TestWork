@@ -6,6 +6,7 @@ namespace EcsSystems
 {
     public class ColorSelectorSystem_Chain : IInit, IUpd
     {
+        Filter<InputData> inputFilter = null;
         Filter<NeedBallTag> needBallFilter = null;
         StaticData _stData = null;
         LevelData _level = null;
@@ -14,9 +15,11 @@ namespace EcsSystems
         int index = 0;
         public void Init()
         {
-            //Init Entity for ColorSelectorSystem
-            var ent = _world.NewEntity();
-            ent.Get<NeedBallTag>();
+            foreach (var i in inputFilter)
+            {
+                var ent = inputFilter.GetEntity(i);
+                ent.Get<NeedBallTag>();
+            }
         }
 
         public void Upd()
@@ -36,6 +39,12 @@ namespace EcsSystems
                 }
 
                 break;
+            }
+
+            foreach (var i in needBallFilter)
+            {
+                var ent = needBallFilter.GetEntity(i);
+                ent.Del<NeedBallTag>();
             }
         }
     }

@@ -1,6 +1,7 @@
 using MyEcs;
 using EcsStructs;
 using HexMap;
+using System;
 
 namespace EcsSystems
 {
@@ -86,8 +87,16 @@ namespace EcsSystems
                 // .X.
                 do
                 {
-                    var currEnt = _grid.data[hexVec.x, hexVec.y];
-                    currEnt.Get<DestroyTag>();
+                    try
+                    {
+                        var currEnt = _grid.data[hexVec.x, hexVec.y];
+                        currEnt.Get<DestroyTag>();
+                    }
+                    catch (Exception ex)
+                    {
+                        UnityEngine.Debug.LogError("values " + hexVec.x + "_" + hexVec.y);
+                        throw ex;
+                    }
 
                     if (haveUpSpace)
                     {

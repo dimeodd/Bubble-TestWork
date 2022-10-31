@@ -40,7 +40,6 @@ public class World_ClassicMode : MonoBehaviour
         _fixUpdSys = new EcsSystem(_world)
             .Add(new ThrowBallSystem())
             .Add(colorSelectorSystem)
-            .OneFrame<NeedBallTag>()
 
             .Add(new PlayerBallSpawner())
             .Add(new AimLineSystem())
@@ -52,9 +51,7 @@ public class World_ClassicMode : MonoBehaviour
             //TODO WinSystem
 
             .OneFrame<ButtonUpTag>()
-            .OneFrame<ButtonDownTag>()
-            .OneFrame<PlayerBallSpawnData>()
-            .OneFrame<BallSpawnData>();
+            .OneFrame<ButtonDownTag>();
 
 
         _allSys = new EcsSystem(_world)

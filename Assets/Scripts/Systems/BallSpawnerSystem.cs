@@ -49,6 +49,12 @@ namespace EcsSystems
                 var entID = go.AddComponent<EntityID>();
                 entID.SetEntity(ent);
             }
+
+            foreach (var i in spawnFilter)
+            {
+                var ent =  spawnFilter.GetEntity(i);
+                ent.Destroy();
+            }
         }
     }
 }

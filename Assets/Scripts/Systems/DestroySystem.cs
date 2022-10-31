@@ -6,44 +6,38 @@ namespace EcsSystems
 {
     public class DestroySystem : IUpd
     {
+        Filter<DestroyTag> destroyFilter = null;
         Filter<DestroyTag, PlayerBallData> playerBallFilter = null;
-        Filter<DestroyTag, BallData, GoEntityProvider> ballFilter = null;
-        Filter<InputData> inputFilter = null;
+        Filter<BlockInputTag, InputData> inputFilter = null;
         EcsWorld _world = null;
 
         public void Upd()
         {
-            //Удаление PlayerBall
-            foreach (var i in playerBallFilter)
+            foreach (var i in destroyFilter)
             {
-                var ball = playerBallFilter.Get2(i);
-                MonoBehaviour.Destroy(ball.go, 0.001f);
+                var ent = destroyFilter.GetEntity(i);
 
-                var ent = playerBallFilter.GetEntity(i);
-                ent.Destroy();
-            }
-            //Разблокировка управления
-            if (playerBallFilter.Count > 0)
-            {
-                foreach (var j in inputFilter)
+                if (ent.Contain<GoEntityProvider>())
                 {
-                    var ent = inputFilter.GetEntity(j);
-                    ent.Del<BlockInputTag>();
-
-                    ent = _world.NewEntity();
-                    ent.Get<NeedBallTag>();
+                    var provider = ent.Get<GoEntityProvider>();
+                    provider.Recycle();
                 }
-            }
 
-            //TODO Удаление Ball
-            foreach (var i in ballFilter)
-            {
-                var prov = ballFilter.Get3(i);
-                MonoBehaviour.Destroy(prov.provider.gameObject, 0.001f);
+                //Разблокировка управления
+                if (ent.Contain<PlayerBallData>())
+                {
+                    foreach (var j in inputFilter)
+                    {
+                        var inputEnt = inputFilter.GetEntity(j);
+                        inputEnt.Del<BlockInputTag>();
+                        inputEnt.Get<NeedBallTag>();
+                        break;
+                    }
+                }
 
-                var ent = ballFilter.GetEntity(i);
                 ent.Destroy();
             }
+
 
         }
     }
