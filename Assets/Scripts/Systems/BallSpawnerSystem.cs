@@ -1,4 +1,5 @@
 using MyEcs;
+using MyEcs.GoPool;
 using EcsStructs;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ namespace EcsSystems
         HexGridData _grid = null;
         SceneData _scene = null;
         EcsWorld _world = null;
+        StaticData _stData = null;
 
         public void Upd()
         {
@@ -27,8 +29,9 @@ namespace EcsSystems
                 var isOutOfChetWidth = x >= _grid.Width - 1;
                 if (isChet & isOutOfChetWidth) continue;
 
-                var go = MonoBehaviour.Instantiate(spawnData.ball, _scene.BallsArea);
+                var go = MonoBehaviour.Instantiate(_stData.balls[spawnData.BallID].Ball, _scene.BallsArea);
                 var tf = go.transform;
+
 
                 if (isChet)
                 {
@@ -40,8 +43,12 @@ namespace EcsSystems
                 }
 
                 var ent = _world.NewEntity();
+                var entID = go.AddComponent<EntityID>();
+                entID.SetEntity(ent);
                 ref var ballData = ref ent.Get<BallData>();
-                //TODO
+                ballData.x = x;
+                ballData.y = y;
+                ballData.BallID = spawnData.BallID;
 
                 _grid.data[x, y] = ent;
             }

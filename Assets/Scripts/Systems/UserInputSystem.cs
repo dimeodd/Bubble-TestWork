@@ -27,6 +27,8 @@ namespace EcsSystems
 
             foreach (var i in inputFilter)
             {
+                var ent = inputFilter.GetEntity(i);
+
                 ref var input = ref inputFilter.Get1(i);
                 var temp = input;
 
@@ -37,12 +39,12 @@ namespace EcsSystems
                 if (Input.GetMouseButtonDown(0))
                 {
                     input.IsPressed = true;
-
+                    ent.Get<ButtonDownTag>();
                 }
                 if (Input.GetMouseButtonUp(0))
                 {
                     input.IsPressed = false;
-
+                    ent.Get<ButtonUpTag>();
                 }
             }
         }

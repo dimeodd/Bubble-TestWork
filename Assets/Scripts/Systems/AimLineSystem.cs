@@ -32,7 +32,7 @@ namespace EcsSystems
                 Vector2 firePointPos = _scene.FirePoint.position;
 
                 //AimLine
-                if (input.IsInsideFireZone & input.IsPressed)
+                if (input.IsInsideFireZone & input.IsPressed & !ent.Contain<BlockInputTag>())
                 {
                     if (!_lineRenderer.enabled) _lineRenderer.enabled = true;
                     DrawAimLine(firePointPos, input.pos - firePointPos);

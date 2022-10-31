@@ -22,6 +22,7 @@ namespace EcsSystems
                 ref var ballData = ref ent.Get<PlayerBallData>();
                 ballData.BallID = spawnData.BallID;
                 ballData.go = MonoBehaviour.Instantiate(_stData.PlayerBall, _scene.FirePoint.position, Quaternion.identity);
+                ballData.rigidbody = ballData.go.GetComponent<Rigidbody2D>();
 
                 var go = ballData.go;
                 var ballScript = go.GetComponent<PlayerBallScript>();

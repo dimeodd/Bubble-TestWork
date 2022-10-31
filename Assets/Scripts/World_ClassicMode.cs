@@ -32,17 +32,21 @@ public class World_ClassicMode : MonoBehaviour
 
 
         _fixUpdSys = new EcsSystem(_world)
+            .Add(new ThrowBallSystem())
             .Add(_level.IsRandomColors ?
                     new ColorSelectorSystem_Random() :
                     new ColorSelectorSystem_Chain()
                 )
+            .OneFrame<NeedBallTag>()
+
             .Add(new PlayerBallSpawner())
             .Add(new AimLineSystem())
             .Add(new BallSpawnerSystem())
             //TODO BallsColideSystem
-            //TODO DestroySystem
 
-            .OneFrame<NeedBallTag>()
+            .Add(new BallsColideSystem())
+            .Add(new DestroySystem())
+
             .OneFrame<ButtonUpTag>()
             .OneFrame<ButtonDownTag>()
             .OneFrame<PlayerBallSpawnData>()

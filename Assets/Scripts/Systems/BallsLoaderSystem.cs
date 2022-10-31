@@ -24,13 +24,11 @@ namespace EcsSystems
                     var ballID = GetBallIDByColor(ballColor);
                     if (ballID == -1) continue;
 
-                    var ballPrefab = _stData.balls[ballID].Ball;
-
                     var ent = _world.NewEntity();
                     ref var spawnData = ref ent.Get<BallSpawnData>();
                     spawnData.x = x;
-                    spawnData.y = y-1;
-                    spawnData.ball = ballPrefab;
+                    spawnData.y = y - 1; //костыль фиксящий дубликат верхнего ряда
+                    spawnData.BallID = ballID;
                 }
             }
         }

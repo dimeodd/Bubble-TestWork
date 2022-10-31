@@ -4,7 +4,7 @@ namespace EcsStructs
 {
     public struct BallSpawnData
     {
-        public GameObject ball;
+        public int BallID;
         public int x;
         public int y;
     }

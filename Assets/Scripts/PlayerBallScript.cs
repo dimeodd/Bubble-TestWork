@@ -12,16 +12,22 @@ public class PlayerBallScript : MonoBehaviour
     public void SetWorld(EcsWorld world) => _world = world;
     public void SetEntity(Entity ent) => _myEnt = ent;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.CompareTag("Void"))
-            _myEnt.Get<DestroyTag>();
 
-        if (other.CompareTag("Ball"))
+        if (other.gameObject.CompareTag("Void"))
         {
+            _myEnt.Get<DestroyTag>();
+        }
+
+        if (other.gameObject.CompareTag("Ball"))
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2();
+
             ref var collideData = ref _myEnt.Get<BallCollideData>();
             collideData.other = other.gameObject;
-            //FIXME система по обработке BallCollideData
+
+            _myEnt.Get<DestroyTag>();
         }
     }
 }

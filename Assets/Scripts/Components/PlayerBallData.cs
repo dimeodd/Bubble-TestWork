@@ -5,5 +5,6 @@ namespace EcsStructs
     {
         public int BallID;
         public GameObject go;
+        public Rigidbody2D rigidbody;
     }
 }
