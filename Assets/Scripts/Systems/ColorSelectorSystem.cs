@@ -18,7 +18,7 @@ namespace EcsSystems
 
         public void Init()
         {
-            _rnd = new Random(_level.BallsSeed);
+            _rnd = new Random(_level.ColorSeed);
 
             foreach (var i in inputFilter)
             {

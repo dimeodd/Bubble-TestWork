@@ -3,3 +3,10 @@ $Random_Mode;Random Mode;
 
 $Pause;Pause;
 $You_win;You win!;
+
+$Seed;Seed;
+$play;Play;
+
+$level_1;Level 1;
+$level_2;Level 2;
+$level_3;Level 3;

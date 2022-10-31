@@ -15,7 +15,7 @@ namespace EcsSystems
         public void Init()
         {
             if (_level.IsRandomMap)
-                GenerateLevel(_level.levelSeed);
+                GenerateLevel(_level.LevelSeed);
             else
                 LoadLevel(_level.levelMap);
         }

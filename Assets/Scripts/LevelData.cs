@@ -7,11 +7,11 @@ public class LevelData : ScriptableObject
     [Header("Map")]
     public bool IsRandomMap;
     public Texture2D levelMap;
-    public int levelSeed;
+    public int LevelSeed;
 
     [Header("Colors")]
     public bool IsRandomColors;
-    public int BallsSeed;
+    public int ColorSeed;
 
     public BallType[] ballIDs;
 }

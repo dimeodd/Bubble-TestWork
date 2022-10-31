@@ -5,8 +5,10 @@ using MyEcs;
 using EcsSystems;
 using EcsStructs;
 
-public class World_ClassicMode : MonoBehaviour
+public class World : MonoBehaviour
 {
+    public static LevelData Level;
+
     public StaticData _stData;
     public LevelData _level;
     public SceneData _scene;
@@ -16,6 +18,11 @@ public class World_ClassicMode : MonoBehaviour
 
     void Start()
     {
+        if (Level != null)
+        {
+            _level = Level;
+        }
+
         _world = new EcsWorld();
         var grid = new HexGridData();
 
