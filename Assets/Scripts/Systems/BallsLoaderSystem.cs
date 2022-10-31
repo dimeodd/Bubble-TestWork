@@ -14,9 +14,41 @@ namespace EcsSystems
 
         public void Init()
         {
-            var map = _level.levelMap;
-            var h = map.height;
+            if (_level.IsRandomMap)
+                GenerateLevel(_level.levelSeed);
+            else
+                LoadLevel(_level.levelMap);
+        }
+
+        void GenerateLevel(int seed)
+        {
+            var w = 11;
+            var h = 10;
+
+            Random.InitState(seed);
+            int colorsCount = Random.Range(7, 15);
+
+            for (int i = 0; i < colorsCount; i++)
+            {
+                var pos = new Vector2Int(Random.Range(0, w), Random.Range(0, h));
+                var size = new Vector2Int(Random.Range(2, 8), Random.Range(2, 5));
+                var ballID = Random.Range(0, 7);
+
+                for (int x = pos.x, xMax = pos.x + size.x; x < xMax; x++)
+                {
+                    for (int y = pos.y, yMax = pos.y + size.y; y < yMax; y++)
+                    {
+                        CreateBall(x, y, ballID);
+                    }
+                }
+            }
+        }
+
+
+        void LoadLevel(Texture2D map)
+        {
             var w = map.width;
+            var h = map.height;
 
             //HexMap
             // 0. [a1][a2][a3][a4]  (a1)(a2)(a3)(a4)
@@ -31,14 +63,12 @@ namespace EcsSystems
                     var ballID = GetBallIDByColor(ballColor);
                     if (ballID == -1) continue;
 
-                    var ent = _world.NewEntity();
-
-                    ref var spawnData = ref ent.Get<BallSpawnData>();
-                    spawnData.hexPos = new HexVector(x, h - y - 1);
-                    spawnData.BallID = ballID;
+                    CreateBall(x, h - y - 1, ballID);
                 }
             }
+
         }
+
 
         int GetBallIDByColor(Color32 color)
         {
@@ -50,6 +80,15 @@ namespace EcsSystems
             }
 
             return -1;
+        }
+
+        void CreateBall(int x, int y, int ballID)
+        {
+            var ent = _world.NewEntity();
+
+            ref var spawnData = ref ent.Get<BallSpawnData>();
+            spawnData.hexPos = new HexVector(x, y);
+            spawnData.BallID = ballID;
         }
     }
 }

@@ -41,7 +41,13 @@ namespace EcsSystems
                     ent.Get<BlopedBallTag>();
                 }
 
+                //Если во время генерации накладываются точки
+                var entFromGrid = _grid.data[hexPos.x, hexPos.y];
+                if (!entFromGrid.IsDestroyed()) entFromGrid.Get<DestroyTag>();
+
                 _grid.data[hexPos.x, hexPos.y] = ent;
+
+
 
                 //Init GameObject
                 var go = MonoBehaviour.Instantiate(_stData.balls[spawnData.BallID].Ball, _scene.BallsArea);

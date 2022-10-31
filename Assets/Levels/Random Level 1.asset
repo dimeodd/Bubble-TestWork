@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abe64bbabc84ab943be30f6e4b78d4af, type: 3}
+  m_Name: Random Level 1
+  m_EditorClassIdentifier: 
+  IsRandomMap: 1
+  levelMap: {fileID: 0}
+  levelSeed: 0
+  IsRandomColors: 1
+  BallsSeed: 0
+  ballIDs: 030000000000000002000000

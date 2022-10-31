@@ -5,7 +5,9 @@ public class LevelData : ScriptableObject
 {
 
     [Header("Map")]
+    public bool IsRandomMap;
     public Texture2D levelMap;
+    public int levelSeed;
 
     [Header("Colors")]
     public bool IsRandomColors;
