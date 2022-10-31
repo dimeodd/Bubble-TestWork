@@ -25,7 +25,6 @@ public class World_ClassicMode : MonoBehaviour
         else
             colorSelectorSystem = new ColorSelectorSystem_Chain();
 
-
         _updSys = new EcsSystem(_world)
             .Add(new FirePointMoverSystem())
             .Add(new CameraMoverSystem())
@@ -34,7 +33,7 @@ public class World_ClassicMode : MonoBehaviour
             .Add(new GridCreatorSystem())
             .Add(new BallsLoaderSystem())
 
-            .Add(new UserInputSystem());
+            .Add( new UserInputSystem());
 
 
         _fixUpdSys = new EcsSystem(_world)
@@ -48,7 +47,7 @@ public class World_ClassicMode : MonoBehaviour
             .Add(new BlopedBubbleSystem())
 
             .Add(new DestroySystem())
-            //TODO WinSystem
+            .Add(new WinSystem())
 
             .OneFrame<ButtonUpTag>()
             .OneFrame<ButtonDownTag>();
@@ -67,11 +66,13 @@ public class World_ClassicMode : MonoBehaviour
 
     void Update()
     {
-        _updSys.Upd();
+        if (!_scene.PauseMenuScript.isPause)
+            _updSys.Upd();
     }
 
     void FixedUpdate()
     {
-        _fixUpdSys.Upd();
+        if (!_scene.PauseMenuScript.isPause)
+            _fixUpdSys.Upd();
     }
 }

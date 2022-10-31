@@ -38,6 +38,11 @@ namespace EcsSystems
                 ent.Destroy();
             }
 
+            if (destroyFilter.Count > 0)
+            {
+                var ent = _world.NewEntity();
+                ent.Get<CheckWinTag>();
+            }
 
         }
     }

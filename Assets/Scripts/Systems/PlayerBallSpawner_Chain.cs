@@ -7,7 +7,7 @@ namespace EcsSystems
     public class ColorSelectorSystem_Chain : IInit, IUpd
     {
         Filter<InputData> inputFilter = null;
-        Filter<NeedBallTag> needBallFilter = null;
+        Filter<NeedBallTag>.Exclude<BlockInputTag> needBallFilter = null;
         StaticData _stData = null;
         LevelData _level = null;
         EcsWorld _world = null;

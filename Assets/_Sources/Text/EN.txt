@@ -2,3 +2,4 @@ $Classic_Mode;Classic Mode;
 $Random_Mode;Random Mode;
 
 $Pause;Pause;
+$You_win;You win!;

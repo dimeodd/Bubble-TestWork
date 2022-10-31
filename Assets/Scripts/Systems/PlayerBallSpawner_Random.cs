@@ -8,6 +8,7 @@ namespace EcsSystems
     {
         Filter<InputData> inputFilter = null;
         Filter<NeedBallTag> needBallFilter = null;
+        Filter<BlockInputTag> blockFilter = null;
         StaticData _stData = null;
         LevelData _level = null;
         EcsWorld _world = null;
@@ -27,6 +28,9 @@ namespace EcsSystems
 
         public void Upd()
         {
+            blockFilter.GetEnumerator();
+            if (blockFilter.Count > 0) return;
+
             foreach (var i in needBallFilter)
             {
                 //Init Entity for BallSpawnerSystem

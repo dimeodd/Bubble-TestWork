@@ -11,6 +11,7 @@ namespace EcsSystems
         SceneData _scene = null;
         EcsWorld _world = null;
 
+        public bool dirtyFlag = false;
         int UIlayer;
         public void Init()
         {
@@ -22,6 +23,7 @@ namespace EcsSystems
 
         public void Upd()
         {
+
             var wPos = _scene.MainCamera.ScreenToWorldPoint(Input.mousePosition);
 
             foreach (var i in inputFilter)
@@ -30,7 +32,6 @@ namespace EcsSystems
                 var ent = inputFilter.GetEntity(i);
 
                 ref var input = ref inputFilter.Get1(i);
-                var temp = input;
 
                 input.pos = wPos;
 
