@@ -41,10 +41,9 @@ public class World_ClassicMode : MonoBehaviour
 
             .Add(new PlayerBallSpawner())
             .Add(new AimLineSystem())
-            .Add(new BallSpawnerSystem())
-            //TODO BallsColideSystem
-
             .Add(new BallsColideSystem())
+            .Add(new BallSpawnerSystem())
+
             .Add(new DestroySystem())
 
             .OneFrame<ButtonUpTag>()

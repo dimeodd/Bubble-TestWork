@@ -14,6 +14,7 @@ public class PlayerBallScript : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D other)
     {
+        if (_myEnt.IsDestroyed()) return;
 
         if (other.gameObject.CompareTag("Void"))
         {
