@@ -8,6 +8,7 @@ public class PlayerBallScript : MonoBehaviour
 {
     Entity _myEnt;
     EcsWorld _world;
+    bool isCollided;
 
     public void SetWorld(EcsWorld world) => _world = world;
     public void SetEntity(Entity ent) => _myEnt = ent;
@@ -23,7 +24,7 @@ public class PlayerBallScript : MonoBehaviour
 
         if (other.gameObject.CompareTag("Ball"))
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2();
+            GetComponent<Rigidbody2D>().simulated = false;
 
             ref var collideData = ref _myEnt.Get<BallCollideData>();
             collideData.other = other.gameObject;

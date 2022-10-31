@@ -27,16 +27,16 @@ namespace EcsSystems
         // 4. Если есть ещё точки в SourcePointList, то GOTO 1
         void MarkSameBalls(Entity source)
         {
-            var SourceList = new MyList<Entity>(4);
-            SourceList.Add(source);
+            var sourceList = new MyList<Entity>(4);
+            sourceList.Add(source);
 
-            while (SourceList.Count > 0)
+            while (sourceList.Count > 0)
             {
 
                 #region  1
 
-                var sourceBallEnt = SourceList._data[0];
-                SourceList.DeleteReplaced(0);
+                var sourceBallEnt = sourceList._data[0];
+                sourceList.DeleteReplaced(0);
 
                 var sourceBall = sourceBallEnt.Get<BallData>();
                 var sourceBallID = sourceBall.BallID;
@@ -56,31 +56,34 @@ namespace EcsSystems
                 var upIsSame = false;
                 var downIsSame = false;
 
-                //HexStuff
-                // Xm.   (X)(m)                    | () |
-                // .0.  (.)(0)(.) - isNotChet Row  |()()|
-                // Xm.   (X)(m)                    | () |
-                // if (!isChet & hexVec.x > 0)
-                // {
-                //     if (haveUpSpace)
-                //     {
-                //         var upEnt = _grid.data[hexVec.x - 1, hexVec.y + 1];
-                //         if (IsRightBall(upEnt, sourceBallID))
-                //         {
-                //             upIsSame = true;
-                //             SourceList.Add(upEnt);
-                //         }
-                //     }
-                //     if (haveDownSpace)
-                //     {
-                //         var downEnt = _grid.data[hexVec.x - 1, hexVec.y - 1];
-                //         if (IsRightBall(downEnt, sourceBallID))
-                //         {
-                //             downIsSame = true;
-                //             SourceList.Add(downEnt);
-                //         }
-                //     }
-                // }
+
+                // | () |
+                // |()()|
+                // | () |
+                if (isChet & hexVec.x > 0)
+                {
+                    if (haveUpSpace)
+                    {
+                        var a = hexVec.MoveTo(1, HexType.LEFT_DOWN);
+                        var upEnt = _grid.data[a.x, a.y];
+                        if (IsRightBall(upEnt, sourceBallID))
+                        {
+                            upIsSame = true;
+                            sourceList.Add(upEnt);
+                        }
+                    }
+                    if (haveDownSpace)
+                    {
+                        var a = hexVec.MoveTo(1, HexType.LEFT_UP);
+                        var downEnt = _grid.data[a.x, a.y];
+                        if (IsRightBall(downEnt, sourceBallID))
+                        {
+                            downIsSame = true;
+                            sourceList.Add(downEnt);
+                        }
+                    }
+                }
+
 
                 // .X.
                 // .0.
@@ -89,63 +92,67 @@ namespace EcsSystems
                 {
                     var currEnt = _grid.data[hexVec.x, hexVec.y];
                     currEnt.Get<DestroyTag>();
+
+                    if (haveUpSpace)
+                    {
+                        var upEnt = _grid.data[hexVec.x, hexVec.y + 1];
+                        if (IsRightBall(upEnt, sourceBallID) & !upIsSame)
+                        {
+                            sourceList.Add(upEnt);
+                            upIsSame = true;
+                        }
+                        else
+                        {
+                            upIsSame = false;
+                        }
+                    }
+                    if (haveDownSpace)
+                    {
+                        var downEnt = _grid.data[hexVec.x, hexVec.y - 1];
+                        if (IsRightBall(downEnt, sourceBallID) & !downIsSame)
+                        {
+                            sourceList.Add(downEnt);
+                            downIsSame = true;
+                        }
+                        else
+                        {
+                            downIsSame = false;
+                        }
+                    }
+
                     hexVec.x++;
                 }
                 while (hexVec.x < _grid.Width && IsRightBall(_grid.data[hexVec.x, hexVec.y], sourceBallID));
 
-                // if (haveUpSpace)
-                // {
-                //     var upEnt = _grid.data[hexVec.x, hexVec.y + 1];
-                //     if (IsRightBall(upEnt, sourceBallID) & !upIsSame)
-                //     {
-                //         SourceList.Add(upEnt);
-                //         upIsSame = true;
-                //     }
-                //     else
-                //     {
-                //         upIsSame = false;
-                //     }
-                // }
-                // if (haveDownSpace)
-                // {
-                //     var downEnt = _grid.data[hexVec.x, hexVec.y - 1];
-                //     if (IsRightBall(downEnt, sourceBallID) & !downIsSame)
-                //     {
-                //         SourceList.Add(downEnt);
-                //         downIsSame = true;
-                //     }
-                //     else
-                //     {
-                //         downIsSame = false;
-                //     }
-                // }
+                hexVec.x--;
+                // |()()|
+                // | () |
+                // |()()|
+                if (!isChet & hexVec.x < _grid.Width - 1)
+                {
+                    if (haveUpSpace)
+                    {
+                        var a = hexVec.MoveTo(1, HexType.RIGHT_DOWN);
+                        var upEnt = _grid.data[a.x, a.y];
+                        if (IsRightBall(upEnt, sourceBallID) & !upIsSame)
+                        {
+                            upIsSame = true;
+                            sourceList.Add(upEnt);
+                        }
+                    }
+                    if (haveDownSpace)
+                    {
+                        var a = hexVec.MoveTo(1, HexType.RIGHT_UP);
+                        var downEnt = _grid.data[a.x, a.y];
+                        if (IsRightBall(downEnt, sourceBallID) & !downIsSame)
+                        {
+                            sourceList.Add(downEnt);
+                        }
+                    }
+                }
 
 
-                //HexStuff
-                // .mX     (m)(X)                |()()|
-                // .0.   (.)(0)(.) - isChet Row  | () |
-                // .mX     (m)(X)                |()()|
-                // if (isChet & hexVec.x < _grid.Width - 1)
-                // {
-                //     if (haveUpSpace)
-                //     {
-                //         var upEnt = _grid.data[hexVec.x + 1, hexVec.y + 1];
-                //         if (IsRightBall(upEnt, sourceBallID))
-                //         {
-                //             if (!upIsSame)
-                //                 SourceList.Add(upEnt);
-                //         }
-                //     }
-                //     if (haveDownSpace)
-                //     {
-                //         var downEnt = _grid.data[hexVec.x + 1, hexVec.y - 1];
-                //         if (IsRightBall(downEnt, sourceBallID))
-                //         {
-                //             if (downIsSame)
-                //                 SourceList.Add(downEnt);
-                //         }
-                //     }
-                // }
+
 
                 #endregion
 

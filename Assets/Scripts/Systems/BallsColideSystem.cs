@@ -8,6 +8,7 @@ namespace EcsSystems
     public class BallsColideSystem : IUpd
     {
         Filter<BallCollideData, PlayerBallData, GoEntityProvider> filter = null;
+        SceneData _scene = null;
         EcsWorld _world = null;
 
         public void Upd()
@@ -26,6 +27,10 @@ namespace EcsSystems
 
                 var dir = HexVector.getDirection(otherPos, myPos);
                 var spawnPos = otherBallData.hexPos.MoveTo(1, dir);
+
+                // UnityEngine.Vector2 wPos = (UnityEngine.Vector3)spawnPos.ToWorldPos() + _scene.BallsArea.position;
+                // UnityEngine.Debug.DrawLine(otherPos, myPos, UnityEngine.Color.white, 2f);
+                // UnityEngine.Debug.DrawLine(wPos, wPos + UnityEngine.Vector2.right, UnityEngine.Color.yellow, 2f);
 
                 var ent = _world.NewEntity();
                 ref var spawnData = ref ent.Get<BallSpawnData>();

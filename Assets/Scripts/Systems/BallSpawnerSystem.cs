@@ -44,11 +44,13 @@ namespace EcsSystems
                 _grid.data[hexPos.x, hexPos.y] = ent;
 
                 //Init GameObject
-                var go = MonoBehaviour.Instantiate(_stData.balls[spawnData.BallID].Ball, _stData.LimboPos, Quaternion.identity);
-                go.transform.SetParent(_scene.BallsArea);
-                go.transform.localPosition = hexPos.ToWorldPos();
+                var go = MonoBehaviour.Instantiate(_stData.balls[spawnData.BallID].Ball, _scene.BallsArea);
+                var tf = go.transform;
+                tf.localPosition = hexPos.ToWorldPos();
                 var entID = go.AddComponent<EntityID>();
                 entID.SetEntity(ent);
+
+                Debug.DrawLine(tf.position, tf.position + Vector3.one, Color.red, 1f);
             }
 
             foreach (var i in spawnFilter)

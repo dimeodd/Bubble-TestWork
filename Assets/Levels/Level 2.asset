@@ -15,4 +15,4 @@ MonoBehaviour:
   levelMap: {fileID: 2800000, guid: 877113b19405e8e429aac35fa9093a2e, type: 3}
   IsRandomColors: 0
   BallsSeed: 0
-  ballIDs: 000000000300000002000000
+  ballIDs: 000000000200000003000000
