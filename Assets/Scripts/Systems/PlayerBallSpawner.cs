@@ -14,7 +14,6 @@ namespace EcsSystems
 
         public void Upd()
         {
-
             //HexMap
             // 0. [a1][a2][a3][a4]  (a1)(a2)(a3)(a4)
             // 1. [b1][b2][b3][b4]    (b1)(b2)(b3)
@@ -41,7 +40,6 @@ namespace EcsSystems
                 ballScript.SetEntity(ent);
 
                 var tf = go.transform;
-                tf.position = _scene.FirePoint.position;
 
                 //Раскрашивание шарика
                 var subGo = MonoBehaviour.Instantiate(_stData.balls[BallID].Ball, tf);

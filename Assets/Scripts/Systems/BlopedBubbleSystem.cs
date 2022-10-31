@@ -60,100 +60,92 @@ namespace EcsSystems
                 // Xm.   (X)(m)                    | () |
                 // .0.  (.)(0)(.) - isNotChet Row  |()()|
                 // Xm.   (X)(m)                    | () |
-                if (!isChet & hexVec.x > 0)
-                {
-                    if (haveUpSpace)
-                    {
-                        var upEnt = _grid.data[hexVec.x - 1, hexVec.y + 1];
-                        if (IsRightBall(upEnt, sourceBallID))
-                        {
-                            upIsSame = true;
-                            SourceList.Add(upEnt);
-                        }
-                    }
-                    if (haveDownSpace)
-                    {
-                        var downEnt = _grid.data[hexVec.x - 1, hexVec.y - 1];
-                        if (IsRightBall(downEnt, sourceBallID))
-                        {
-                            downIsSame = true;
-                            SourceList.Add(downEnt);
-                        }
-                    }
-                }
+                // if (!isChet & hexVec.x > 0)
+                // {
+                //     if (haveUpSpace)
+                //     {
+                //         var upEnt = _grid.data[hexVec.x - 1, hexVec.y + 1];
+                //         if (IsRightBall(upEnt, sourceBallID))
+                //         {
+                //             upIsSame = true;
+                //             SourceList.Add(upEnt);
+                //         }
+                //     }
+                //     if (haveDownSpace)
+                //     {
+                //         var downEnt = _grid.data[hexVec.x - 1, hexVec.y - 1];
+                //         if (IsRightBall(downEnt, sourceBallID))
+                //         {
+                //             downIsSame = true;
+                //             SourceList.Add(downEnt);
+                //         }
+                //     }
+                // }
 
                 // .X.
                 // .0.
                 // .X.
                 do
                 {
-                    try
-                    {
-                        var currEnt = _grid.data[hexVec.x, hexVec.y];
-                        currEnt.Get<DestroyTag>();
-                    }
-                    catch (Exception ex)
-                    {
-                        UnityEngine.Debug.LogError("values " + hexVec.x + "_" + hexVec.y);
-                        throw ex;
-                    }
-
-                    if (haveUpSpace)
-                    {
-                        var upEnt = _grid.data[hexVec.x, hexVec.y + 1];
-                        if (IsRightBall(upEnt, sourceBallID) & !upIsSame)
-                        {
-                            SourceList.Add(upEnt);
-                            upIsSame = true;
-                        }
-                        else
-                        {
-                            upIsSame = false;
-                        }
-                    }
-                    if (haveDownSpace)
-                    {
-                        var downEnt = _grid.data[hexVec.x, hexVec.y - 1];
-                        if (IsRightBall(downEnt, sourceBallID) & !downIsSame)
-                        {
-                            SourceList.Add(downEnt);
-                            downIsSame = true;
-                        }
-                        else
-                        {
-                            downIsSame = false;
-                        }
-                    }
-
+                    var currEnt = _grid.data[hexVec.x, hexVec.y];
+                    currEnt.Get<DestroyTag>();
                     hexVec.x++;
                 }
                 while (hexVec.x < _grid.Width && IsRightBall(_grid.data[hexVec.x, hexVec.y], sourceBallID));
+
+                // if (haveUpSpace)
+                // {
+                //     var upEnt = _grid.data[hexVec.x, hexVec.y + 1];
+                //     if (IsRightBall(upEnt, sourceBallID) & !upIsSame)
+                //     {
+                //         SourceList.Add(upEnt);
+                //         upIsSame = true;
+                //     }
+                //     else
+                //     {
+                //         upIsSame = false;
+                //     }
+                // }
+                // if (haveDownSpace)
+                // {
+                //     var downEnt = _grid.data[hexVec.x, hexVec.y - 1];
+                //     if (IsRightBall(downEnt, sourceBallID) & !downIsSame)
+                //     {
+                //         SourceList.Add(downEnt);
+                //         downIsSame = true;
+                //     }
+                //     else
+                //     {
+                //         downIsSame = false;
+                //     }
+                // }
+
 
                 //HexStuff
                 // .mX     (m)(X)                |()()|
                 // .0.   (.)(0)(.) - isChet Row  | () |
                 // .mX     (m)(X)                |()()|
-                if (isChet & hexVec.x < _grid.Width - 1)
-                {
-                    if (haveUpSpace)
-                    {
-                        var upEnt = _grid.data[hexVec.x + 1, hexVec.y + 1];
-                        if (IsRightBall(upEnt, sourceBallID))
-                        {
-                            if (!upIsSame)
-                                SourceList.Add(upEnt);
-                        }
-                    }
-                    if (haveDownSpace)
-                    {
-                        var downEnt = _grid.data[hexVec.x + 1, hexVec.y - 1];
-                        if (IsRightBall(downEnt, sourceBallID))
-                        {
-                            if (downIsSame)
-                                SourceList.Add(downEnt);
-                        }
-                    }
-                }
+                // if (isChet & hexVec.x < _grid.Width - 1)
+                // {
+                //     if (haveUpSpace)
+                //     {
+                //         var upEnt = _grid.data[hexVec.x + 1, hexVec.y + 1];
+                //         if (IsRightBall(upEnt, sourceBallID))
+                //         {
+                //             if (!upIsSame)
+                //                 SourceList.Add(upEnt);
+                //         }
+                //     }
+                //     if (haveDownSpace)
+                //     {
+                //         var downEnt = _grid.data[hexVec.x + 1, hexVec.y - 1];
+                //         if (IsRightBall(downEnt, sourceBallID))
+                //         {
+                //             if (downIsSame)
+                //                 SourceList.Add(downEnt);
+                //         }
+                //     }
+                // }
 
                 #endregion
 

@@ -4,11 +4,11 @@ using UnityEngine;
 
 namespace EcsSystems
 {
-    public class BallsAreaMoverSystem : IUpd
+    public class BallsAreaMoverSystem : IInit
     {
         SceneData _scene = null;
 
-        public void Upd()
+        public void Init()
         {
             //TODO сделать прокрутку как в играх из ТЗ
             Vector3 leftScreenCornerPos = _scene.MainCamera.ScreenToWorldPoint(new Vector2(0, Screen.height));

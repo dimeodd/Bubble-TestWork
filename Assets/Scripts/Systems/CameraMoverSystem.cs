@@ -6,7 +6,7 @@ using EcsStructs;
 
 namespace EcsSystems
 {
-    public class CameraMoverSystem : IInit, IUpd
+    public class CameraMoverSystem : IInit
     {
         StaticData _stData = null;
         SceneData _scene = null;
@@ -16,10 +16,7 @@ namespace EcsSystems
         public void Init()
         {
             _targetWidth = (float)_stData.GridWidth / 2;
-        }
 
-        public void Upd()
-        {
             float h = Screen.height;
             float w = Screen.width;
             var z = h / w;

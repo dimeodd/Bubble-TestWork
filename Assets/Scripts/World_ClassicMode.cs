@@ -27,12 +27,12 @@ public class World_ClassicMode : MonoBehaviour
 
 
         _updSys = new EcsSystem(_world)
-            .Add(new GridCreatorSystem())
-            .Add(new BallsLoaderSystem())
-
+            .Add(new FirePointMoverSystem())
             .Add(new CameraMoverSystem())
             .Add(new BallsAreaMoverSystem())
-            .Add(new FirePointMoverSystem())
+
+            .Add(new GridCreatorSystem())
+            .Add(new BallsLoaderSystem())
 
             .Add(new UserInputSystem());
 
