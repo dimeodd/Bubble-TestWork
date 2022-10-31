@@ -34,7 +34,8 @@ public class World : MonoBehaviour
             .Add(new GridCreatorSystem())
             .Add(new BallsLoaderSystem())
 
-            .Add(new UserInputSystem());
+            .Add(new UserInputSystem())
+            .Add(new AimLineSystem());
 
 
         _fixUpdSys = new EcsSystem(_world)
@@ -42,7 +43,6 @@ public class World : MonoBehaviour
             .Add(new ColorSelectorSystem())
 
             .Add(new PlayerBallSpawner())
-            .Add(new AimLineSystem())
             .Add(new BallsColideSystem())
             .Add(new BallSpawnerSystem())
             .Add(new BlopedBubbleSystem())
