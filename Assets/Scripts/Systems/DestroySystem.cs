@@ -12,6 +12,7 @@ namespace EcsSystems
 
         public void Upd()
         {
+            //Удаление PlayerBall
             foreach (var i in ballFilter)
             {
                 ref var ball = ref ballFilter.Get2(i);
@@ -19,7 +20,7 @@ namespace EcsSystems
                 var ent = ballFilter.GetEntity(i);
                 ent.Destroy();
             }
-
+            //Разблокировка управления
             if (ballFilter.Count > 0)
             {
                 foreach (var j in inputFilter)
@@ -31,6 +32,8 @@ namespace EcsSystems
                     ent.Get<NeedBallTag>();
                 }
             }
+
+            //TODO Удаление Ball
 
         }
     }

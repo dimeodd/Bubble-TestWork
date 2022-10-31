@@ -8,8 +8,8 @@ namespace EcsSystems
 {
     public class CameraMoverSystem : IInit, IUpd
     {
-        SceneData _scene = null;
         StaticData _stData = null;
+        SceneData _scene = null;
 
         float _targetWidth;
 

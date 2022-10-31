@@ -20,7 +20,7 @@ MonoBehaviour:
   FirePointOffset: 3.5
   BallSpeed: 20
   PlayerBall: {fileID: 8191436441044458949, guid: 8dd74d403df879e4ba65cb866fa371ff, type: 3}
-  TestBall: {fileID: 5933537116744638863, guid: e84185ffff181b4418e931a75df55269, type: 3}
+  AimBall: {fileID: 2953837134472258512, guid: 782da916897beb94e956f4911d8a70d7, type: 3}
   balls:
   - SpawnColor:
       serializedVersion: 2

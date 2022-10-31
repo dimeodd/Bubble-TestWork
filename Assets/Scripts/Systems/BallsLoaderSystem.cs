@@ -7,9 +7,9 @@ namespace EcsSystems
 {
     public class BallsLoaderSystem : IInit
     {
-        EcsWorld _world = null;
         StaticData _stData = null;
         LevelData _level = null;
+        EcsWorld _world = null;
 
         public void Init()
         {
@@ -26,6 +26,7 @@ namespace EcsSystems
                     if (ballID == -1) continue;
 
                     var ent = _world.NewEntity();
+
                     ref var spawnData = ref ent.Get<BallSpawnData>();
                     spawnData.hexPos = new HexVector(x, y - 1); //FIXME костыль фиксящий дубликат верхнего ряда
                     spawnData.BallID = ballID;

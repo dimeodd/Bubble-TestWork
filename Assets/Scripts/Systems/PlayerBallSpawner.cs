@@ -15,23 +15,28 @@ namespace EcsSystems
         {
             foreach (var i in spawnFilter)
             {
-                ref var spawnData = ref spawnFilter.Get1(i);
+                var BallID = spawnFilter.Get1(i).BallID;
 
+                //Init Entity
                 var ent = _world.NewEntity();
 
                 ref var ballData = ref ent.Get<PlayerBallData>();
-                ballData.BallID = spawnData.BallID;
+                ballData.BallID = BallID;
                 ballData.go = MonoBehaviour.Instantiate(_stData.PlayerBall, _scene.FirePoint.position, Quaternion.identity);
                 ballData.rigidbody = ballData.go.GetComponent<Rigidbody2D>();
 
+                //Init GameObject
                 var go = ballData.go;
+
                 var ballScript = go.GetComponent<PlayerBallScript>();
                 ballScript.SetWorld(_world);
                 ballScript.SetEntity(ent);
+
                 var tf = go.transform;
                 tf.position = _scene.FirePoint.position;
 
-                var subGo = MonoBehaviour.Instantiate(_stData.balls[spawnData.BallID].Ball, tf);
+                //Раскрашивание шарика
+                var subGo = MonoBehaviour.Instantiate(_stData.balls[BallID].Ball, tf);
                 subGo.GetComponent<Collider2D>().enabled = false;
             }
         }

@@ -9,5 +9,4 @@ public class SceneData : MonoBehaviour
     public Transform BallsArea;
     public Transform FirePoint;
     public LineRenderer AimLine;
-    public Transform AimBall;
 }

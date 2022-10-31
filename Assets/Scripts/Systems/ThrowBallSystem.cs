@@ -7,9 +7,9 @@ namespace EcsSystems
     public class ThrowBallSystem : IUpd
     {
         Filter<InputData, ButtonUpTag>.Exclude<BlockInputTag> inputFilter = null;
-        Filter<PlayerBallData> ballFilter = null;
-        SceneData _scene = null;
+        Filter<PlayerBallData> playerBallFilter = null;
         StaticData _stData = null;
+        SceneData _scene = null;
 
         public void Upd()
         {
@@ -18,11 +18,13 @@ namespace EcsSystems
                 ref var input = ref inputFilter.Get1(j);
                 if (!input.IsInsideFireZone) continue;
 
-                foreach (var i in ballFilter)
+                foreach (var i in playerBallFilter)
                 {
-                    ref var ball = ref ballFilter.Get1(i);
-                    ball.rigidbody.velocity = (input.pos - (Vector2)_scene.FirePoint.position).normalized * _stData.BallSpeed;
+                    var rb = playerBallFilter.Get1(i).rigidbody;
+                    rb.velocity = (input.pos - (Vector2)_scene.FirePoint.position).normalized * _stData.BallSpeed;
                 }
+
+                //Блокировка управления
                 var ent = inputFilter.GetEntity(j);
                 ent.Get<BlockInputTag>();
             }

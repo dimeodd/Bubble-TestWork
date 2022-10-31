@@ -6,27 +6,31 @@ namespace EcsSystems
 {
     public class ColorSelectorSystem_Random : IInit, IUpd
     {
-        Filter<NeedBallTag> filter = null;
+        Filter<NeedBallTag> needBallFilter = null;
         StaticData _stData = null;
         LevelData _level = null;
         EcsWorld _world = null;
 
-        Random rnd;
+        Random _rnd;
 
         public void Init()
         {
+            _rnd = new Random(_level.BallsSeed);
+
+            //Init Entity for ColorSelectorSystem
             var ent = _world.NewEntity();
             ent.Get<NeedBallTag>();
-            rnd = new Random(_level.BallsSeed);
         }
 
         public void Upd()
         {
-            foreach (var i in filter)
+            foreach (var i in needBallFilter)
             {
+                //Init Entity for BallSpawnerSystem
                 var ent = _world.NewEntity();
+
                 ref var spawnData = ref ent.Get<PlayerBallSpawnData>();
-                spawnData.BallID = rnd.Next() % 7;
+                spawnData.BallID = _rnd.Next() % 7;
                 break;
             }
         }

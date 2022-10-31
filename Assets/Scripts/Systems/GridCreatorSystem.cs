@@ -5,17 +5,17 @@ namespace EcsSystems
 {
     public class GridCreatorSystem : IInit
     {
-        HexGridData grid = null;
         StaticData _stData = null;
+        HexGridData _grid = null;
 
         public void Init()
         {
             var w = _stData.GridWidth;
             var h = _stData.GridHeight;
 
-            grid.data = new Entity[w, h];
-            grid.Width = w;
-            grid.Height = h;
+            _grid.data = new Entity[w, h];
+            _grid.Width = w;
+            _grid.Height = h;
         }
     }
 }

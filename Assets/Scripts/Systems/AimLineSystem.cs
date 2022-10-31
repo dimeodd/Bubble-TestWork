@@ -7,23 +7,27 @@ namespace EcsSystems
     public class AimLineSystem : IInit, IUpd
     {
         Filter<InputData> inputFilter = null;
-        SceneData _scene = null;
         StaticData _stData = null;
+        SceneData _scene = null;
 
         int _reflectMask;
         LineRenderer _lineRenderer;
-        MyList<Vector3> points = new MyList<Vector3>(4);
+        Transform _AimBall;
+        MyList<Vector3> _points = new MyList<Vector3>(4);
 
         public void Init()
         {
             _reflectMask = _stData.ReflectMask;
             _lineRenderer = _scene.AimLine;
+
+            _AimBall = MonoBehaviour.Instantiate(_stData.AimBall).transform;
+            _AimBall.position = _stData.LimboPos;
         }
 
         public void Upd()
         {
             //Сброс позиции AimBall
-            _scene.AimBall.position = _stData.LimboPos;
+            _AimBall.position = _stData.LimboPos;
 
             foreach (var i in inputFilter)
             {
@@ -46,45 +50,49 @@ namespace EcsSystems
 
         void DrawAimLine(Vector2 origin, Vector2 direction)
         {
-            points.Clear();
-            points.Add(origin);
+            _points.Clear();
+            _points.Add(origin);
 
             for (int i = 0, iMax = _stData.AimCastCount; i < iMax; i++)
             {
+                direction.Normalize();
+
                 var hit = Physics2D.CircleCast(origin, 0.5f, direction, float.PositiveInfinity, _reflectMask);
                 if (!hit || hit.collider.CompareTag("Void")) break;
 
-                var isLastRaycast = i == iMax - 1;
-                var isBigDistannce = hit.distance > _stData.LastAimRange;
+                var isLastRaycast = i == (iMax - 1);
+                var isBigDistance = hit.distance > _stData.LastAimRange;
 
-                if (isLastRaycast & isBigDistannce)
+                if (isLastRaycast & isBigDistance)
                 {
-                    points.Add(origin + (hit.centroid - origin).normalized * _stData.LastAimRange);
+                    _points.Add(origin + (hit.centroid - origin).normalized * _stData.LastAimRange);
                 }
                 else
                 {
-                    points.Add(hit.centroid);
+                    _points.Add(hit.centroid + direction * 0.5f);
 
                     if (hit.collider.CompareTag("Ball"))
                     {
+#if UNITY_EDITOR
                         DrawAimBall(hit);
+#endif
                         break;
                     }
                 }
 
-                direction = Vector2.Reflect(hit.centroid - origin, hit.normal).normalized;
+                direction = Vector2.Reflect(hit.centroid - origin, hit.normal);
                 origin = hit.centroid + direction * 0.05f;
             }
 
-            _lineRenderer.positionCount = points.Count;
-            _lineRenderer.SetPositions(points.ToArray());
+            _lineRenderer.positionCount = _points.Count;
+            _lineRenderer.SetPositions(_points.ToArray());
         }
 
         void DrawAimBall(RaycastHit2D hit)
         {
             Vector3 aimBallPos = BallHelper.GetBallPositionByHit(hit);
             aimBallPos.z = -1;
-            _scene.AimBall.position = aimBallPos;
+            _AimBall.position = aimBallPos;
         }
     }
 }

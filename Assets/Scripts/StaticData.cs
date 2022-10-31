@@ -20,7 +20,7 @@ public class StaticData : ScriptableObject
     
     public float BallSpeed = 1f;
     public GameObject PlayerBall;
-    public GameObject TestBall;
+    public GameObject AimBall;
     public BallProperty[] balls;
 
 

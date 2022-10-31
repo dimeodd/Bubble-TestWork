@@ -9,10 +9,10 @@ namespace EcsSystems
     public class BallSpawnerSystem : IUpd
     {
         Filter<BallSpawnData> spawnFilter = null;
-        HexGridData _grid = null;
+        StaticData _stData = null;
         SceneData _scene = null;
         EcsWorld _world = null;
-        StaticData _stData = null;
+        HexGridData _grid = null;
 
         public void Upd()
         {
@@ -29,29 +29,26 @@ namespace EcsSystems
                 var isOutOfChetWidth = hexPos.x >= _grid.Width - 1;
                 if (isChet & isOutOfChetWidth) continue;
 
-
+                //Init Entity
                 var ent = _world.NewEntity();
 
                 ref var ballData = ref ent.Get<BallData>();
                 ballData.hexPos = hexPos;
                 ballData.BallID = spawnData.BallID;
 
-                _grid.data[hexPos.x, hexPos.y] = ent;
-
-                var go = MonoBehaviour.Instantiate(_stData.balls[spawnData.BallID].Ball, _scene.BallsArea);
-                go.transform.localPosition = hexPos.ToWorldPos();
-                var entID = go.AddComponent<EntityID>();
-                entID.SetEntity(ent);
-
                 if (spawnData.isPlayerBall)
                 {
                     ent.Get<BlopedBallTag>();
                 }
+
+                _grid.data[hexPos.x, hexPos.y] = ent;
+
+                //Init GameObject
+                var go = MonoBehaviour.Instantiate(_stData.balls[spawnData.BallID].Ball, _scene.BallsArea);
+                go.transform.localPosition = hexPos.ToWorldPos();
+                var entID = go.AddComponent<EntityID>();
+                entID.SetEntity(ent);
             }
-        }
-        static float GetHexHeight(float h)
-        {
-            return h * StaticData.sin60;
         }
     }
 }

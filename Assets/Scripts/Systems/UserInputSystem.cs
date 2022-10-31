@@ -22,17 +22,18 @@ namespace EcsSystems
 
         public void Upd()
         {
-            var pos = Input.mousePosition;
-            var wPos = _scene.MainCamera.ScreenToWorldPoint(pos);
+            var wPos = _scene.MainCamera.ScreenToWorldPoint(Input.mousePosition);
 
             foreach (var i in inputFilter)
             {
+                //Init Entity
                 var ent = inputFilter.GetEntity(i);
 
                 ref var input = ref inputFilter.Get1(i);
                 var temp = input;
 
                 input.pos = wPos;
+
                 var collider = Physics2D.OverlapPoint(wPos, UIlayer);
                 input.IsInsideFireZone = collider != null;
 
