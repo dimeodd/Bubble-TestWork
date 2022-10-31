@@ -24,28 +24,28 @@ namespace EcsSystems
         // 2. Ищут самую левый пиксель в этом ряду. Идут пока не будет другой цвет.
         // 3. Идут от него вправо (и сразу заменяют цвет), проверяя верхний и нижний пиксель. Если цвет похож (У внерхнего/нижнего), то добавляют пиксель в SourcePointList
         // 4. Если есть ещё точки в SourcePointList, то GOTO 1
-        void MarkSameBalls(Entity sourceBall)
+        void MarkSameBalls(Entity source)
         {
             var SourceList = new MyList<Entity>(4);
-            SourceList.Add(sourceBall);
+            SourceList.Add(source);
 
             while (SourceList.Count > 0)
             {
 
                 #region  1
 
-                var SourceBallEnt = SourceList._data[0];
+                var sourceBallEnt = SourceList._data[0];
                 SourceList.DeleteReplaced(0);
 
-                var SourceBall = SourceBallEnt.Get<BallData>();
-                var SourceBallID = SourceBall.BallID;
-                var hexVec = SourceBall.hexPos;
-                var isChet = hexVec.IsChet();
+                var sourceBall = sourceBallEnt.Get<BallData>();
+                var sourceBallID = sourceBall.BallID;
+                var hexVec = sourceBall.hexPos;
+                var isChet = !hexVec.IsChet();
 
                 #endregion
 
                 // 2
-                while (hexVec.x > 0 && IsRightBall(_grid.data[hexVec.x - 1, hexVec.y], SourceBallID))
+                while (hexVec.x > 0 && IsRightBall(_grid.data[hexVec.x - 1, hexVec.y], sourceBallID))
                     hexVec.x--;
 
                 #region  3
@@ -61,26 +61,30 @@ namespace EcsSystems
                 // Xm.   (X)(m)                    | () |
                 if (!isChet & hexVec.x > 0)
                 {
-                    if (haveUpSpace && IsRightBall(_grid.data[hexVec.x - 1, hexVec.y + 1], SourceBallID))
+                    if (haveUpSpace)
                     {
-                        var ent = _grid.data[hexVec.x - 1, hexVec.y + 1];
-                        ent.Get<DestroyTag>();
-                        upIsSame = true;
-                        SourceList.Add(ent);
+                        var upEnt = _grid.data[hexVec.x - 1, hexVec.y + 1];
+                        if (IsRightBall(upEnt, sourceBallID))
+                        {
+                            upIsSame = true;
+                            SourceList.Add(upEnt);
+                        }
                     }
-                    if (haveDownSpace && IsRightBall(_grid.data[hexVec.x - 1, hexVec.y - 1], SourceBallID))
+                    if (haveDownSpace)
                     {
-                        var ent = _grid.data[hexVec.x - 1, hexVec.y - 1];
-                        ent.Get<DestroyTag>();
-                        downIsSame = true;
-                        SourceList.Add(ent);
+                        var downEnt = _grid.data[hexVec.x - 1, hexVec.y - 1];
+                        if (IsRightBall(downEnt, sourceBallID))
+                        {
+                            downIsSame = true;
+                            SourceList.Add(downEnt);
+                        }
                     }
                 }
 
                 // .X.
                 // .0.
                 // .X.
-                while (hexVec.x < _grid.Width - 1 && IsRightBall(_grid.data[hexVec.x + 1, hexVec.y], SourceBallID))
+                do
                 {
                     var currEnt = _grid.data[hexVec.x, hexVec.y];
                     currEnt.Get<DestroyTag>();
@@ -88,7 +92,7 @@ namespace EcsSystems
                     if (haveUpSpace)
                     {
                         var upEnt = _grid.data[hexVec.x, hexVec.y + 1];
-                        if (IsRightBall(upEnt, SourceBallID) & !upIsSame)
+                        if (IsRightBall(upEnt, sourceBallID) & !upIsSame)
                         {
                             SourceList.Add(upEnt);
                             upIsSame = true;
@@ -101,7 +105,7 @@ namespace EcsSystems
                     if (haveDownSpace)
                     {
                         var downEnt = _grid.data[hexVec.x, hexVec.y - 1];
-                        if (IsRightBall(downEnt, SourceBallID) & !downIsSame)
+                        if (IsRightBall(downEnt, sourceBallID) & !downIsSame)
                         {
                             SourceList.Add(downEnt);
                             downIsSame = true;
@@ -114,6 +118,7 @@ namespace EcsSystems
 
                     hexVec.x++;
                 }
+                while (hexVec.x < _grid.Width && IsRightBall(_grid.data[hexVec.x, hexVec.y], sourceBallID));
 
                 //HexStuff
                 // .mX     (m)(X)                |()()|
@@ -121,19 +126,23 @@ namespace EcsSystems
                 // .mX     (m)(X)                |()()|
                 if (isChet & hexVec.x < _grid.Width - 1)
                 {
-                    if (haveUpSpace && IsRightBall(_grid.data[hexVec.x + 1, hexVec.y + 1], SourceBallID))
+                    if (haveUpSpace)
                     {
-                        var ent = _grid.data[hexVec.x + 1, hexVec.y + 1];
-                        ent.Get<DestroyTag>();
-                        if (!upIsSame)
-                            SourceList.Add(ent);
+                        var upEnt = _grid.data[hexVec.x + 1, hexVec.y + 1];
+                        if (IsRightBall(upEnt, sourceBallID))
+                        {
+                            if (!upIsSame)
+                                SourceList.Add(upEnt);
+                        }
                     }
-                    if (haveDownSpace && IsRightBall(_grid.data[hexVec.x + 1, hexVec.y - 1], SourceBallID))
+                    if (haveDownSpace)
                     {
-                        var ent = _grid.data[hexVec.x + 1, hexVec.y - 1];
-                        ent.Get<DestroyTag>();
-                        if (downIsSame)
-                            SourceList.Add(ent);
+                        var downEnt = _grid.data[hexVec.x + 1, hexVec.y - 1];
+                        if (IsRightBall(downEnt, sourceBallID))
+                        {
+                            if (downIsSame)
+                                SourceList.Add(downEnt);
+                        }
                     }
                 }
 
