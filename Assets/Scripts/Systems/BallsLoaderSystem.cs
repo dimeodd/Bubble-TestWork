@@ -25,16 +25,16 @@ namespace EcsSystems
 
             for (int x = 0; x < w; x++)
             {
-                for (int y = 1; y < h; y++) //FIXME костыль фиксящий дубликат верхнего ряда
+                for (int y = 0; y < h; y++)
                 {
-                    Color32 ballColor = map.GetPixel(x, h - y);
+                    Color32 ballColor = map.GetPixel(x, y);
                     var ballID = GetBallIDByColor(ballColor);
                     if (ballID == -1) continue;
 
                     var ent = _world.NewEntity();
 
                     ref var spawnData = ref ent.Get<BallSpawnData>();
-                    spawnData.hexPos = new HexVector(x, y - 1); //FIXME костыль фиксящий дубликат верхнего ряда
+                    spawnData.hexPos = new HexVector(x, h - y - 1);
                     spawnData.BallID = ballID;
                 }
             }
