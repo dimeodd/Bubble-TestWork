@@ -43,6 +43,7 @@ public class World_ClassicMode : MonoBehaviour
             .Add(new AimLineSystem())
             .Add(new BallsColideSystem())
             .Add(new BallSpawnerSystem())
+            .Add(new BangBubbleSystem())
 
             .Add(new DestroySystem())
 

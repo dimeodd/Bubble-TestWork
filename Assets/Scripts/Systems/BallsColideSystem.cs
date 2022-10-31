@@ -30,6 +30,7 @@ namespace EcsSystems
                 spawnData.BallID = ballData.BallID;
                 spawnData.x = spawnPos.x;
                 spawnData.y = spawnPos.y;
+                spawnData.isPlayerBall = true;
             }
 
         }

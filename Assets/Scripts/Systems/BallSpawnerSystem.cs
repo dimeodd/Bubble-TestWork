@@ -30,17 +30,7 @@ namespace EcsSystems
                 if (isChet & isOutOfChetWidth) continue;
 
                 var go = MonoBehaviour.Instantiate(_stData.balls[spawnData.BallID].Ball, _scene.BallsArea);
-                var tf = go.transform;
-
-
-                if (isChet)
-                {
-                    tf.localPosition = new Vector3(x + 0.5f, -GetHexHeight(y), 0);
-                }
-                else
-                {
-                    tf.localPosition = new Vector3(x, -GetHexHeight(y), 0);
-                }
+                go.transform.localPosition = BallHelper.IndexToPos(x, y);
 
                 var ent = _world.NewEntity();
                 var entID = go.AddComponent<EntityID>();
@@ -51,10 +41,22 @@ namespace EcsSystems
                 ballData.BallID = spawnData.BallID;
 
                 _grid.data[x, y] = ent;
+
+                //TODO
+                if (spawnData.isPlayerBall)
+                {
+                    var arr = BallHelper.GetClosestIndexesByIndex(x, y);
+                    int sameCount = 0;
+
+                    for (int k = 0; k < 2; k++)
+                    {
+                        utrirhtoniu
+                    }
+                    if (sameCount > 2)
+                        ent.Get<BlopedBallTag>();
+                }
             }
         }
-
-        const float sin60 = 0.86602540378443864676372317075294f;
         static float GetHexHeight(float h)
         {
             return h * StaticData.sin60;
