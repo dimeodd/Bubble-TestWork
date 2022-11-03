@@ -6,6 +6,7 @@ namespace EcsSystems
 {
     public class AimLineSystem : IInit, IUpd
     {
+        Filter<BlockInputTag> blockFilter = null;
         Filter<InputData> inputFilter = null;
         StaticData _stData = null;
         SceneData _scene = null;
@@ -26,6 +27,9 @@ namespace EcsSystems
 
         public void Upd()
         {
+            blockFilter.GetEnumerator();
+            if (blockFilter.Count > 0) return;
+
             //Сброс позиции AimBall
             _AimBall.position = _stData.LimboPos;
 
@@ -58,11 +62,16 @@ namespace EcsSystems
                 direction.Normalize();
 
                 var hit = Physics2D.CircleCast(origin, 0.5f, direction, float.PositiveInfinity, _reflectMask);
-                if (!hit || hit.collider.CompareTag("Void")) break;
+
+                var isInfinity = !hit || hit.collider.CompareTag("Void");
+                if (isInfinity)
+                {
+                    _points.Add(origin + direction * _stData.LastAimRange);
+                    break;
+                }
 
                 var isLastRaycast = i == (iMax - 1);
                 var isBigDistance = hit.distance > _stData.LastAimRange;
-
                 if (isLastRaycast & isBigDistance)
                 {
                     _points.Add(origin + (hit.centroid - origin).normalized * _stData.LastAimRange);
