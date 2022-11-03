@@ -21,6 +21,7 @@ namespace EcsSystems
                 ref var spawnData = ref spawnFilter.Get1(i);
                 var hexPos = spawnData.hexPos;
 
+
                 var isOutOfWidth = hexPos.x < 0 | hexPos.x >= _grid.Width;
                 var isOutOfHeight = hexPos.y < 0 | hexPos.y >= _grid.Height;
                 if (isOutOfWidth | isOutOfHeight) continue;
@@ -29,8 +30,16 @@ namespace EcsSystems
                 var isOutOfChetWidth = hexPos.x >= _grid.Width - 1;
                 if (isChet & isOutOfChetWidth) continue;
 
+                var entFromGrid = _grid.data[hexPos.x, hexPos.y];
+                var isContainBall = !entFromGrid.IsDestroyed();
+                if (isContainBall)
+                {
+                    entFromGrid.Get<DestroyTag>();
+                }
+
                 //Init Entity
                 var ent = _world.NewEntity();
+                _grid.data[hexPos.x, hexPos.y] = ent;
 
                 ref var ballData = ref ent.Get<BallData>();
                 ballData.hexPos = hexPos;
@@ -40,13 +49,6 @@ namespace EcsSystems
                 {
                     ent.Get<BlopedBallTag>();
                 }
-
-                //Если во время генерации накладываются точки
-                var entFromGrid = _grid.data[hexPos.x, hexPos.y];
-                if (!entFromGrid.IsDestroyed()) entFromGrid.Get<DestroyTag>();
-
-                _grid.data[hexPos.x, hexPos.y] = ent;
-
 
 
                 //Init GameObject

@@ -2,14 +2,15 @@ using MyEcs;
 using MyEcs.GoPool;
 using EcsStructs;
 using HexMap;
+using UnityEngine;
 
 namespace EcsSystems
 {
     public class BallsColideSystem : IUpd
     {
         Filter<BallCollideData, PlayerBallData, GoEntityProvider> filter = null;
-        SceneData _scene = null;
         EcsWorld _world = null;
+        HexGridData _grid = null;
 
         public void Upd()
         {
@@ -27,6 +28,17 @@ namespace EcsSystems
 
                 var dir = HexVector.getDirection(otherPos, myPos);
                 var spawnPos = otherBallData.hexPos.MoveTo(1, dir);
+
+                //Фикс ошибок физического движка от юнити. Очень редко, но бывают
+                if (spawnPos.x < 0)
+                {
+                    spawnPos.x = 0;
+                }
+                if (spawnPos.x >= _grid.Width ||
+                spawnPos.IsChet() & spawnPos.x >= _grid.Width - 1)
+                {
+                    spawnPos.x--;
+                }
 
                 var ent = _world.NewEntity();
                 ref var spawnData = ref ent.Get<BallSpawnData>();

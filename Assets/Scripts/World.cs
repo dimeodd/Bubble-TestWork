@@ -27,8 +27,8 @@ public class World : MonoBehaviour
         var grid = new HexGridData();
 
         _updSys = new EcsSystem(_world)
-            .Add(new FirePointMoverSystem())
             .Add(new CameraMoverSystem())
+            .Add(new FirePointMoverSystem())
             .Add(new BallsAreaMoverSystem())
 
             .Add(new GridCreatorSystem())
@@ -42,10 +42,11 @@ public class World : MonoBehaviour
             .Add(new ThrowBallSystem())
             .Add(new ColorSelectorSystem())
 
-            .Add(new PlayerBallSpawner())
             .Add(new BallsColideSystem())
-            .Add(new BallSpawnerSystem())
             .Add(new BlopedBubbleSystem())
+
+            .Add(new BallSpawnerSystem())
+            .Add(new PlayerBallSpawner())
 
             .Add(new DestroySystem())
             .Add(new WinSystem())

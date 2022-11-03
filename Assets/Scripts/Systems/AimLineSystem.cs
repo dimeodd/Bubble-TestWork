@@ -69,7 +69,7 @@ namespace EcsSystems
                 }
                 else
                 {
-                    _points.Add(hit.centroid + direction * 0.5f);
+                    _points.Add(hit.centroid);
 
                     if (hit.collider.CompareTag("Ball"))
                     {

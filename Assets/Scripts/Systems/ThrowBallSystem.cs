@@ -6,14 +6,21 @@ namespace EcsSystems
 {
     public class ThrowBallSystem : IUpd
     {
-        Filter<InputData, ButtonUpTag>.Exclude<BlockInputTag> inputFilter = null;
+        Filter<InputData, ButtonUpTag> inputFilter = null;
         Filter<PlayerBallData> playerBallFilter = null;
+        Filter<BlockInputTag> blockFilter = null;
+
         StaticData _stData = null;
         SceneData _scene = null;
         PauseMenu _pauseMenu = null;
+        EcsWorld _world = null;
 
         public void Upd()
         {
+            blockFilter.GetEnumerator();
+            if (blockFilter.Count > 0) return;
+
+            //Предотвращает запуск шарика после закрытия меню паузы
             if (_pauseMenu.timeFromPause < 0.5f)
                 return;
 
@@ -29,7 +36,7 @@ namespace EcsSystems
                 }
 
                 //Блокировка управления
-                var ent = inputFilter.GetEntity(j);
+                var ent = _world.NewEntity();
                 ent.Get<BlockInputTag>();
             }
 

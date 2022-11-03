@@ -7,8 +7,7 @@ namespace EcsSystems
     public class DestroySystem : IUpd
     {
         Filter<DestroyTag> destroyFilter = null;
-        Filter<DestroyTag, PlayerBallData> playerBallFilter = null;
-        Filter<BlockInputTag, InputData> inputFilter = null;
+        Filter<BlockInputTag> blockFilter = null;
         EcsWorld _world = null;
 
         public void Upd()
@@ -26,12 +25,10 @@ namespace EcsSystems
                 //Разблокировка управления
                 if (ent.Contain<PlayerBallData>())
                 {
-                    foreach (var j in inputFilter)
+                    foreach (var j in blockFilter)
                     {
-                        var inputEnt = inputFilter.GetEntity(j);
-                        inputEnt.Del<BlockInputTag>();
-                        inputEnt.Get<NeedBallTag>();
-                        break;
+                        var inputEnt = blockFilter.GetEntity(j);
+                        inputEnt.Destroy();
                     }
                 }
 

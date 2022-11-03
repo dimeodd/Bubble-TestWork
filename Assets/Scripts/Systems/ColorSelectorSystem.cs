@@ -6,25 +6,17 @@ namespace EcsSystems
 {
     public class ColorSelectorSystem : IInit, IUpd
     {
-        Filter<InputData> inputFilter = null;
-        Filter<NeedBallTag> needBallFilter = null;
+        Filter<PlayerBallData> playerBallFilter = null;
         Filter<BlockInputTag> blockFilter = null;
-        StaticData _stData = null;
         LevelData _level = null;
         EcsWorld _world = null;
 
         Random _rnd;
-        int index = 0;
+        int _index = 0;
 
         public void Init()
         {
             _rnd = new Random(_level.ColorSeed);
-
-            foreach (var i in inputFilter)
-            {
-                var ent = inputFilter.GetEntity(i);
-                ent.Get<NeedBallTag>();
-            }
         }
 
         public void Upd()
@@ -32,50 +24,34 @@ namespace EcsSystems
             blockFilter.GetEnumerator();
             if (blockFilter.Count > 0) return;
 
-            if (_level.IsRandomColors)
-                CreateRandomColor();
-            else
-                CreateCustomColor();
-
-            foreach (var i in needBallFilter)
-            {
-                var ent = needBallFilter.GetEntity(i);
-                ent.Del<NeedBallTag>();
-            }
-        }
-
-        void CreateRandomColor()
-        {
-            foreach (var i in needBallFilter)
+            playerBallFilter.GetEnumerator();
+            if (playerBallFilter.Count == 0)
             {
                 //Init Entity for BallSpawnerSystem
                 var ent = _world.NewEntity();
 
                 ref var spawnData = ref ent.Get<PlayerBallSpawnData>();
-                spawnData.BallID = _rnd.Next() % 7;
-
-                break;
+                spawnData.BallID = _level.IsRandomColors ?
+                        GetRandomColor() :
+                        GetCustomColor();
             }
         }
 
-        void CreateCustomColor()
+        int GetRandomColor()
         {
-            foreach (var i in needBallFilter)
+            return _rnd.Next() % 7;
+        }
+
+        int GetCustomColor()
+        {
+            int ballID = (int)_level.ballIDs[_index];
+            _index++;
+            if (_index >= _level.ballIDs.Length)
             {
-                //Init Entity for BallSpawnerSystem
-                var ent = _world.NewEntity();
-
-                ref var spawnData = ref ent.Get<PlayerBallSpawnData>();
-                spawnData.BallID = (int)_level.ballIDs[index];
-
-                index++;
-                if (index >= _level.ballIDs.Length)
-                {
-                    index = 0;
-                }
-
-                break;
+                _index = 0;
             }
+
+            return ballID;
         }
     }
 }
