@@ -6,6 +6,7 @@ using EcsStructs;
 
 public class PlayerBallScript : MonoBehaviour
 {
+    public AudioSource Audio;
     Entity _myEnt;
     EcsWorld _world;
     bool isCollided;
@@ -16,6 +17,8 @@ public class PlayerBallScript : MonoBehaviour
     void OnCollisionEnter2D(Collision2D other)
     {
         if (_myEnt.IsDestroyed()) return;
+
+        Audio.Play();
 
         if (other.gameObject.CompareTag("Void"))
         {

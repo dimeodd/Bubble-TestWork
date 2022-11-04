@@ -41,6 +41,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 5a198af11ba589d4fa0ea475cf498d12, type: 3}
   - {fileID: 21300000, guid: a0e00032a0a9fb24194d5a7d48b764e6, type: 3}
   - {fileID: 21300000, guid: 0c1e6913f9e15724caf32af5bb085228, type: 3}
+  - {fileID: 21300000, guid: 2f5189d37c4e3df4d9b61ea4ea04b67c, type: 3}
   - {fileID: 21300000, guid: 75a1b584f47042d4a9520af0dd9048b1, type: 3}
   - {fileID: 21300000, guid: a95fbb55f5919a34bb780690390af0b6, type: 3}
   - {fileID: 21300000, guid: 306d6f366384373468c1ae22c79e7384, type: 3}
@@ -61,6 +62,7 @@ SpriteAtlas:
   - pause menu
   - mute_white
   - volume
+  - volume_white
   - close
   - triangle
   - united-kingdom

@@ -12,6 +12,7 @@ namespace EcsSystems
         Filter<BlopBallCheckData> filter = null;
         HexGridData _grid = null;
         StaticData _stData = null;
+        SceneData _scene = null;
 
         public void Upd()
         {
@@ -25,6 +26,7 @@ namespace EcsSystems
 
                 if (blopCount >= _stData.CountRequredForBlop)
                 {
+                    _scene.BloopSound.Play();
                     foreach (var i in markedBallFilter)
                     {
                         var destrEnt = markedBallFilter.GetEntity(i);

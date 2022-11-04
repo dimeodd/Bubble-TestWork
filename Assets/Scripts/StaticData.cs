@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 [CreateAssetMenu(fileName = "StaticData", menuName = "Bubble-TestWork/StaticData", order = 0)]
 public class StaticData : ScriptableObject
@@ -31,6 +32,9 @@ public class StaticData : ScriptableObject
 
     [Header("Other")]
     public Vector2 LimboPos = new Vector2(-500, -500);
+    public Sprite SoundOnSprite;
+    public Sprite SoundOffSprite;
+    public AudioMixer AudioMixer;
 
     public const float sin60 = 0.86602540378443864676372317075294f;
     public const float cos60 = 0.5f;
