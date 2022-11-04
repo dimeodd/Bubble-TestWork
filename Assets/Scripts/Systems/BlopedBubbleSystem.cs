@@ -7,9 +7,9 @@ namespace EcsSystems
 {
     public class BlopedBubbleSystem : IUpd
     {
-        Filter<DestroyTag, BallData> destroyFilter = null;
+        Filter<MarkedBallTag> markedBallFilter = null;
 
-        Filter<BlopedBallTag, BallData> filter = null;
+        Filter<BlopBallCheckData> filter = null;
         HexGridData _grid = null;
         StaticData _stData = null;
 
@@ -17,26 +17,26 @@ namespace EcsSystems
         {
             foreach (var j in filter)
             {
-                var ent = filter.GetEntity(j);
+                var checkData = filter.Get1(j);
+
                 var blopCount = 0;
 
-                MarkSameBalls(ent, ref blopCount);
+                MarkSameBalls(checkData.ballEnt, ref blopCount);
 
-                if (blopCount < _stData.CountRequredForBlop)
+                if (blopCount >= _stData.CountRequredForBlop)
                 {
-                    foreach (var i in destroyFilter)
+                    foreach (var i in markedBallFilter)
                     {
-                        var destrEnt = destroyFilter.GetEntity(i);
-                        destrEnt.Del<DestroyTag>();
+                        var destrEnt = markedBallFilter.GetEntity(i);
+                        destrEnt.Get<DestroyTag>();
                     }
-
                 }
             }
 
             foreach (var i in filter)
             {
                 var ent = filter.GetEntity(i);
-                ent.Del<BlopedBallTag>();
+                ent.Del<BlopBallCheckData>();
             }
         }
 
@@ -112,7 +112,7 @@ namespace EcsSystems
                 do
                 {
                     var currEnt = _grid.data[hexVec.x, hexVec.y];
-                    currEnt.Get<DestroyTag>();
+                    currEnt.Get<MarkedBallTag>();
                     blopCount++;
 
                     if (haveUpSpace)
@@ -185,7 +185,7 @@ namespace EcsSystems
 
         bool IsRightBall(Entity ballEnt, int BallID)
         {
-            if (ballEnt.IsDestroyed() || ballEnt.Contain<DestroyTag>()) return false;
+            if (ballEnt.IsDestroyed() || ballEnt.Contain<MarkedBallTag>()) return false;
 
             var ball = ballEnt.Get<BallData>();
 

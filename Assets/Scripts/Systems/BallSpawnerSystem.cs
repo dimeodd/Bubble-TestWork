@@ -47,7 +47,9 @@ namespace EcsSystems
 
                 if (spawnData.isPlayerBall)
                 {
-                    ent.Get<BlopedBallTag>();
+                    var checkEnt = _world.NewEntity();
+                    ref var checkData = ref checkEnt.Get<BlopBallCheckData>();
+                    checkData.ballEnt = ent;
                 }
 
 

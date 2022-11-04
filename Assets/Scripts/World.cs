@@ -39,18 +39,19 @@ public class World : MonoBehaviour
 
 
         _fixUpdSys = new EcsSystem(_world)
+            .Add(new PlayerBallSpawner())
             .Add(new ThrowBallSystem())
             .Add(new ColorSelectorSystem())
 
             .Add(new BallsColideSystem())
-            .Add(new BlopedBubbleSystem())
-
             .Add(new BallSpawnerSystem())
-            .Add(new PlayerBallSpawner())
+            .Add(new BlopedBubbleSystem())
 
             .Add(new DestroySystem())
             .Add(new WinSystem())
 
+            .OneFrame<MarkedBallTag>()
+            .OneFrame<CheckWinTag>()
             .OneFrame<ButtonUpTag>()
             .OneFrame<ButtonDownTag>();
 
